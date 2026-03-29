@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Damian Enríquez — Portafolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy: #0f1923;
+      --navy2: #1a2736;
+      --accent: #c8a96e;
+      --text: #e8e2d9;
+      --muted: #8a9bb0;
+      --sidebar-w: 300px;
+      --transition: 0.4s cubic-bezier(0.77,0,0.18,1);
+    }
+
+    html, body {
+      height: 100%;
+      background: var(--navy);
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      overflow-x: hidden;
+    }
+
+    /* ── SIDEBAR ── */
+    #sidebar {
+      position: fixed;
+      top: 0; left: 0;
+      width: var(--sidebar-w);
+      height: 100%;
+      background: var(--navy2);
+      border-right: 1px solid rgba(200,169,110,0.2);
+      transform: translateX(calc(-1 * var(--sidebar-w)));
+      transition: transform var(--transition);
+      z-index: 100;
+      display: flex;
+      flex-direction: column;
+      padding: 2.5rem 2rem;
+      overflow-y: auto;
+    }
+
+    #sidebar.open { transform: translateX(0); }
+
+    .sidebar-avatar {
+      width: 72px; height: 72px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent), #8b6e3a);
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Playfair Display', serif;
+      font-size: 28px;
+      color: var(--navy);
+      margin-bottom: 1.2rem;
+      flex-shrink: 0;
+    }
+
+    .sidebar-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 22px;
+      font-weight: 400;
+      color: var(--text);
+      line-height: 1.2;
+      margin-bottom: 4px;
+    }
+
+    .sidebar-role {
+      font-size: 11px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 2rem;
+    }
+
+    .sidebar-divider {
+      height: 1px;
+      background: rgba(200,169,110,0.2);
+      margin: 1.2rem 0;
+    }
+
+    .sidebar-section-label {
+      font-size: 10px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 0.6rem;
+    }
+
+    .sidebar-item {
+      font-size: 13px;
+      color: var(--text);
+      line-height: 1.9;
+      opacity: 0.85;
+    }
+
+    .sidebar-item a {
+      color: var(--accent);
+      text-decoration: none;
+      font-size: 13px;
+    }
+
+    .sidebar-item a:hover { text-decoration: underline; }
+
+    .tag-row { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
+
+    .tag {
+      font-size: 11px;
+      padding: 3px 10px;
+      border: 1px solid rgba(200,169,110,0.35);
+      border-radius: 20px;
+      color: var(--accent);
+    }
+
+    /* ── TOGGLE BUTTON ── */
+    #toggle {
+      position: fixed;
+      top: 1.5rem; left: 1.5rem;
+      z-index: 200;
+      background: none;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      padding: 8px;
+      transition: left var(--transition);
+    }
+
+    #toggle.shifted { left: calc(var(--sidebar-w) + 1rem); }
+
+    #toggle span {
+      display: block;
+      width: 24px; height: 2px;
+      background: var(--accent);
+      border-radius: 2px;
+      transition: transform 0.3s, opacity 0.3s;
+    }
+
+    #toggle.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    #toggle.open span:nth-child(2) { opacity: 0; }
+    #toggle.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    /* ── OVERLAY ── */
+    #overlay {
+      position: fixed; inset: 0;
+      background: rgba(10,15,22,0.55);
+      z-index: 90;
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.3s;
+    }
+    #overlay.visible { opacity: 1; pointer-events: all; }
+
+    /* ── MAIN CONTENT ── */
+    main {
+      min-height: 100vh;
+      padding: 5rem 3rem 4rem;
+      max-width: 860px;
+      margin: 0 auto;
+      transition: filter var(--transition);
+    }
+
+    main.blurred { filter: blur(2px); pointer-events: none; }
+
+    .hero {
+      padding-bottom: 3rem;
+      border-bottom: 1px solid rgba(200,169,110,0.15);
+      margin-bottom: 3rem;
+      animation: fadeUp 0.7s ease both;
+    }
+
+    .hero-label {
+      font-size: 11px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1rem;
+    }
+
+    .hero-name {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(36px, 7vw, 64px);
+      font-weight: 400;
+      line-height: 1.05;
+      color: var(--text);
+      margin-bottom: 1.2rem;
+    }
+
+    .hero-desc {
+      font-size: 16px;
+      color: var(--muted);
+      line-height: 1.75;
+      max-width: 540px;
+    }
+
+    /* ── PROJECTS SECTION ── */
+    .section-title {
+      font-size: 11px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1.5rem;
+    }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.2rem;
+    }
+
+    .project-card {
+      background: var(--navy2);
+      border: 1px solid rgba(200,169,110,0.15);
+      border-radius: 10px;
+      padding: 1.5rem;
+      text-decoration: none;
+      color: inherit;
+      display: block;
+      transition: border-color 0.25s, transform 0.25s;
+      animation: fadeUp 0.7s ease both;
+    }
+
+    .project-card:hover {
+      border-color: rgba(200,169,110,0.5);
+      transform: translateY(-3px);
+    }
+
+    .project-card-icon {
+      font-size: 22px;
+      margin-bottom: 0.8rem;
+    }
+
+    .project-card-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 17px;
+      font-weight: 400;
+      color: var(--text);
+      margin-bottom: 0.5rem;
+    }
+
+    .project-card-desc {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.65;
+      margin-bottom: 1rem;
+    }
+
+    .project-card-tags { display: flex; flex-wrap: wrap; gap: 5px; }
+
+    .project-card-tag {
+      font-size: 11px;
+      padding: 2px 9px;
+      border: 1px solid rgba(200,169,110,0.3);
+      border-radius: 20px;
+      color: var(--accent);
+    }
+
+    .add-card {
+      border: 1px dashed rgba(200,169,110,0.25);
+      border-radius: 10px;
+      padding: 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 0.5rem;
+      color: var(--muted);
+      font-size: 13px;
+      min-height: 140px;
+    }
+
+    .add-card-plus {
+      font-size: 28px;
+      color: rgba(200,169,110,0.3);
+      line-height: 1;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(18px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .project-card:nth-child(1) { animation-delay: 0.1s; }
+    .project-card:nth-child(2) { animation-delay: 0.2s; }
+    .project-card:nth-child(3) { animation-delay: 0.3s; }
+
+    @media (max-width: 600px) {
+      main { padding: 4.5rem 1.5rem 3rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Toggle button -->
+<button id="toggle" aria-label="Abrir menú">
+  <span></span><span></span><span></span>
+</button>
+
+<!-- Overlay -->
+<div id="overlay"></div>
+
+<!-- Sidebar -->
+<nav id="sidebar" aria-label="Información de contacto">
+  <div class="sidebar-avatar">DE</div>
+  <div class="sidebar-name">Damian Enríquez</div>
+  <div class="sidebar-role">Ing. Sistemas de Información</div>
+
+  <div class="sidebar-section-label">Contacto</div>
+  <div class="sidebar-item"><a href="mailto:damianenriquez680@gmail.com">damianenriquez680@gmail.com</a></div>
+  <div class="sidebar-item">637 132 3711</div>
+  <div class="sidebar-item"><a href="https://github.com/damianenriquez680" target="_blank">github.com/damianenriquez680</a></div>
+  <div class="sidebar-item">Hermosillo, Sonora</div>
+
+  <div class="sidebar-divider"></div>
+
+  <div class="sidebar-section-label">Formación</div>
+  <div class="sidebar-item" style="font-weight:500">Ing. en Sistemas de Información</div>
+  <div class="sidebar-item">Universidad de Sonora</div>
+  <div class="sidebar-item" style="color:var(--muted);font-size:12px">En curso</div>
+
+  <div class="sidebar-divider"></div>
+
+  <div class="sidebar-section-label">Tecnologías</div>
+  <div class="tag-row">
+    <span class="tag">C#</span>
+    <span class="tag">Java</span>
+    <span class="tag">Python</span>
+    <span class="tag">SQL Server</span>
+    <span class="tag">Visual Studio</span>
+  </div>
+
+  <div class="sidebar-divider"></div>
+
+  <div class="sidebar-section-label">Idiomas</div>
+  <div class="sidebar-item">Español — Nativo</div>
+  <div class="sidebar-item">Inglés — B1</div>
+</nav>
+
+<!-- Main -->
+<main id="main">
+  <section class="hero">
+    <div class="hero-label">Portafolio</div>
+    <h1 class="hero-name">Damian<br>Enríquez</h1>
+    <p class="hero-desc">Estudiante de Ingeniería en Sistemas de Información en la Universidad de Sonora. Desarrollo aplicaciones de escritorio con C# y bases de datos relacionales con SQL Server.</p>
+  </section>
+
+  <section>
+    <div class="section-title">Proyectos</div>
+    <div class="projects-grid">
+
+      <!-- Proyecto 1 — reemplaza href con tu link real de GitHub -->
+      <a class="project-card" href="https://github.com/damianenriquez680" target="_blank">
+        <div class="project-card-icon">🗃️</div>
+        <div class="project-card-title">Sistema Escolar</div>
+        <div class="project-card-desc">Aplicación de escritorio con CRUD para gestión de alumnos y base de datos relacional.</div>
+        <div class="project-card-tags">
+          <span class="project-card-tag">C#</span>
+          <span class="project-card-tag">SQL Server</span>
+          <span class="project-card-tag">Windows Forms</span>
+        </div>
+      </a>
+
+      <!-- Proyecto 2 — reemplaza href con tu link real de GitHub -->
+      <a class="project-card" href="https://github.com/damianenriquez680" target="_blank">
+        <div class="project-card-icon">📐</div>
+        <div class="project-card-title">Calculadora de Coordenadas</div>
+        <div class="project-card-desc">Cálculos matemáticos en sistemas de coordenadas 2D y 3D implementados en consola.</div>
+        <div class="project-card-tags">
+          <span class="project-card-tag">Java</span>
+        </div>
+      </a>
+
+      <!-- Tarjeta placeholder para proyectos futuros -->
+      <div class="add-card">
+        <div class="add-card-plus">+</div>
+        <span>Próximo proyecto</span>
+      </div>
+
+    </div>
+  </section>
+</main>
+
+<script>
+  const toggle = document.getElementById('toggle');
+  const sidebar = document.getElementById('sidebar');
+  const overlay = document.getElementById('overlay');
+  const mainEl = document.getElementById('main');
+
+  function openSidebar() {
+    sidebar.classList.add('open');
+    toggle.classList.add('open', 'shifted');
+    overlay.classList.add('visible');
+    mainEl.classList.add('blurred');
+  }
+
+  function closeSidebar() {
+    sidebar.classList.remove('open');
+    toggle.classList.remove('open', 'shifted');
+    overlay.classList.remove('visible');
+    mainEl.classList.remove('blurred');
+  }
+
+  toggle.addEventListener('click', () => {
+    sidebar.classList.contains('open') ? closeSidebar() : openSidebar();
+  });
+
+  overlay.addEventListener('click', closeSidebar);
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') closeSidebar();
+  });
+</script>
+</body>
+</html>
