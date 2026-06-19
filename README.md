@@ -26,6 +26,7 @@ Estudiante de **Ingeniería en Sistemas de Información** en la Universidad de S
 |----------|------------|-------------|
 | Sistema Escolar con Base de Datos | C#, SQL Server, Windows Forms | [Ver repo](https://github.com/damianenriquez680/DS3_SistemaEscolarBD) |
 | Calculadora de Coordenadas | Java | [Ver repo](https://github.com/damianenriquez680/CalculadoraCoordenadas) |
+| BiblioTeca | Flask | SQLite | Python | [Ver repo](https://github.com/damianenriquez680/biblioteca_flask) |
 
 ---
 
