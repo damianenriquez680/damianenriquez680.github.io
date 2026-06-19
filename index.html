@@ -15,6 +15,7 @@
       --text: #e8e2d9;
       --muted: #8a9bb0;
       --sidebar-w: 300px;
+      --detail-w: 340px;
       --transition: 0.4s cubic-bezier(0.77,0,0.18,1);
     }
 
@@ -140,6 +141,11 @@
       margin-left: var(--sidebar-w);
       padding: 5rem 3rem 4rem;
       max-width: 860px;
+      transition: margin-right var(--transition);
+    }
+
+    body.detail-open main {
+      margin-right: var(--detail-w);
     }
 
     .hero {
@@ -196,8 +202,12 @@
       text-decoration: none;
       color: inherit;
       display: block;
+      width: 100%;
+      text-align: left;
+      font-family: inherit;
       transition: border-color 0.25s, transform 0.25s;
       animation: fadeUp 0.7s ease both;
+      cursor: pointer;
     }
 
     .project-card:hover {
@@ -244,6 +254,127 @@
     .project-card:nth-child(2) { animation-delay: 0.2s; }
     .project-card:nth-child(3) { animation-delay: 0.3s; }
 
+    /* ── PROJECT DETAIL PANEL ── */
+    #detail-panel {
+      position: fixed;
+      top: 0; right: 0;
+      width: 0;
+      height: 100%;
+      background: var(--navy2);
+      border-left: 1px solid rgba(200,169,110,0.2);
+      z-index: 150;
+      overflow: hidden;
+      transition: width var(--transition);
+    }
+
+    #detail-panel.open {
+      width: var(--detail-w);
+    }
+
+    .detail-inner {
+      width: var(--detail-w);
+      height: 100%;
+      padding: 2.5rem 2rem;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .detail-close {
+      align-self: flex-start;
+      background: none;
+      border: 1px solid rgba(200,169,110,0.3);
+      color: var(--accent);
+      font-size: 13px;
+      padding: 6px 14px;
+      border-radius: 20px;
+      cursor: pointer;
+      margin-bottom: 2rem;
+      transition: background 0.2s, border-color 0.2s;
+    }
+
+    .detail-close:hover {
+      background: rgba(200,169,110,0.1);
+      border-color: var(--accent);
+    }
+
+    .detail-icon {
+      font-size: 30px;
+      margin-bottom: 0.8rem;
+    }
+
+    .detail-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 26px;
+      font-weight: 400;
+      color: var(--text);
+      line-height: 1.15;
+      margin-bottom: 0.8rem;
+    }
+
+    .detail-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 1.6rem; }
+
+    .detail-section-label {
+      font-size: 10px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin: 1.4rem 0 0.6rem;
+    }
+
+    .detail-desc {
+      font-size: 14px;
+      color: var(--text);
+      opacity: 0.85;
+      line-height: 1.75;
+    }
+
+    .detail-features {
+      list-style: none;
+      font-size: 13px;
+      color: var(--text);
+      opacity: 0.85;
+      line-height: 1.9;
+    }
+
+    .detail-features li {
+      padding-left: 16px;
+      position: relative;
+    }
+
+    .detail-features li::before {
+      content: "—";
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+    }
+
+    .detail-repo-btn {
+      margin-top: 2rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      background: var(--accent);
+      color: var(--navy);
+      font-size: 13px;
+      font-weight: 500;
+      text-decoration: none;
+      padding: 12px 20px;
+      border-radius: 8px;
+      transition: opacity 0.2s, transform 0.2s;
+    }
+
+    .detail-repo-btn:hover {
+      opacity: 0.88;
+      transform: translateY(-2px);
+    }
+
+    /* ── DETAIL OVERLAY (móvil) ── */
+    #detail-overlay {
+      display: none;
+    }
+
     @media (max-width: 600px) {
       #sidebar {
         position: static;
@@ -253,14 +384,57 @@
         border-bottom: 1px solid rgba(200,169,110,0.2);
       }
 
+      body.detail-open main { margin-right: 0; }
+
       main {
         margin-left: 0;
         padding: 2.5rem 1.5rem 3rem;
       }
+
+      #detail-panel {
+        width: 0;
+      }
+
+      #detail-panel.open {
+        width: 100%;
+      }
+
+      .detail-inner { width: 100%; }
+
+      #detail-overlay {
+        display: block;
+        position: fixed; inset: 0;
+        background: rgba(10,15,22,0.6);
+        z-index: 140;
+        opacity: 0; pointer-events: none;
+        transition: opacity 0.3s;
+      }
+
+      #detail-overlay.visible { opacity: 1; pointer-events: all; }
     }
   </style>
 </head>
 <body>
+
+<!-- Project detail panel -->
+<aside id="detail-panel" aria-label="Detalle del proyecto">
+  <div class="detail-inner">
+    <button class="detail-close" id="detail-close">Cerrar →</button>
+    <div class="detail-icon" id="detail-icon"></div>
+    <div class="detail-title" id="detail-title"></div>
+    <div class="detail-tags" id="detail-tags"></div>
+
+    <div class="detail-section-label">Descripción</div>
+    <p class="detail-desc" id="detail-desc"></p>
+
+    <div class="detail-section-label">Funcionalidades destacadas</div>
+    <ul class="detail-features" id="detail-features"></ul>
+
+    <a class="detail-repo-btn" id="detail-repo" href="#" target="_blank">Ver repositorio →</a>
+  </div>
+</aside>
+
+<div id="detail-overlay"></div>
 
 <!-- Sidebar -->
 <nav id="sidebar" aria-label="Información de contacto">
@@ -313,8 +487,8 @@
     <div class="section-title">Proyectos</div>
     <div class="projects-grid">
 
-      <!-- Proyecto 1 — reemplaza href con tu link real de GitHub -->
-      <a class="project-card" href="https://github.com/damianenriquez680" target="_blank">
+      <!-- Proyecto 1 -->
+      <button class="project-card" data-project="sistema-escolar">
         <div class="project-card-icon">🗃️</div>
         <div class="project-card-title">Sistema Escolar</div>
         <div class="project-card-desc">Aplicación de escritorio con CRUD para gestión de alumnos y base de datos relacional.</div>
@@ -323,20 +497,20 @@
           <span class="project-card-tag">SQL Server</span>
           <span class="project-card-tag">Windows Forms</span>
         </div>
-      </a>
+      </button>
 
-      <!-- Proyecto 2 — reemplaza href con tu link real de GitHub -->
-      <a class="project-card" href="https://github.com/damianenriquez680" target="_blank">
+      <!-- Proyecto 2 -->
+      <button class="project-card" data-project="calculadora">
         <div class="project-card-icon">📐</div>
         <div class="project-card-title">Calculadora de Coordenadas</div>
         <div class="project-card-desc">Cálculos matemáticos en sistemas de coordenadas 2D y 3D implementados en consola.</div>
         <div class="project-card-tags">
           <span class="project-card-tag">Java</span>
         </div>
-      </a>
+      </button>
 
-      <!-- Proyecto 3 — reemplaza href con tu link real de GitHub -->
-      <a class="project-card" href="https://github.com/damianenriquez680" target="_blank">
+      <!-- Proyecto 3 -->
+      <button class="project-card" data-project="biblioteca">
         <div class="project-card-icon">📚</div>
         <div class="project-card-title">BiblioTeca</div>
         <div class="project-card-desc">API REST con Flask y SQLite para gestión de libros y préstamos, con interfaz HTML.</div>
@@ -345,11 +519,99 @@
           <span class="project-card-tag">SQLite</span>
           <span class="project-card-tag">Python</span>
         </div>
-      </a>
+      </button>
 
     </div>
   </section>
 </main>
+
+<script>
+  const projects = {
+    'sistema-escolar': {
+      icon: '🗃️',
+      title: 'Sistema Escolar con Base de Datos',
+      tags: ['C#', 'SQL Server', 'Windows Forms'],
+      desc: 'Aplicación de escritorio para la gestión académica de una institución educativa, con operaciones CRUD completas sobre una base de datos relacional de 11 tablas interconectadas: alumnos, académicos, materias, grupos, aulas, carreras y más.',
+      features: [
+        'Catálogos de Materia, Aula, Académico, Alumno, Carrera, Ciudad, Estado, País y Estatus',
+        'Gestión de Grupos con maestro, aula, horario y carrera asignados',
+        'Registro de Reinscripciones con calificaciones',
+        'Interfaz Windows Forms con navegación centralizada',
+        'Proyecto en equipo — Desarrollo de Sistemas 3'
+      ],
+      repo: 'https://github.com/damianenriquez680/DS3_SistemaEscolarBD'
+    },
+    'calculadora': {
+      icon: '📐',
+      title: 'Calculadora de Sistemas de Coordenadas',
+      tags: ['Java'],
+      desc: 'Aplicación de consola que realiza conversiones entre sistemas de coordenadas y calcula distancias entre puntos, tanto en dos como en tres dimensiones.',
+      features: [
+        'Conversión 2D: rectangulares ↔ polares',
+        'Conversión 3D: rectangulares, cilíndricas y esféricas entre sí',
+        'Cálculo de distancia entre puntos en cualquier combinación de sistemas',
+        'Código organizado en clases por tipo de coordenada'
+      ],
+      repo: 'https://github.com/damianenriquez680/CalculadoraCoordenadas'
+    },
+    'biblioteca': {
+      icon: '📚',
+      title: 'BiblioTeca — Sistema de Gestión de Biblioteca',
+      tags: ['Flask', 'SQLite', 'Python'],
+      desc: 'API REST construida con Flask y SQLite para administrar libros y préstamos de una biblioteca, con interfaz HTML conectada al backend.',
+      features: [
+        'Endpoints REST completos para libros y préstamos',
+        'Control automático de stock al crear o eliminar préstamos',
+        'Validación de email, ISBN y año de publicación',
+        'Queries parametrizadas para prevenir inyección SQL',
+        'Estadísticas generales vía endpoint /stats',
+        'Proyecto en equipo'
+      ],
+      repo: 'https://github.com/damianenriquez680/biblioteca_flask'
+    }
+  };
+
+  const panel = document.getElementById('detail-panel');
+  const overlay = document.getElementById('detail-overlay');
+  const body = document.body;
+
+  function openDetail(key) {
+    const p = projects[key];
+    if (!p) return;
+
+    document.getElementById('detail-icon').textContent = p.icon;
+    document.getElementById('detail-title').textContent = p.title;
+    document.getElementById('detail-desc').textContent = p.desc;
+    document.getElementById('detail-repo').href = p.repo;
+
+    document.getElementById('detail-tags').innerHTML =
+      p.tags.map(t => `<span class="tag">${t}</span>`).join('');
+
+    document.getElementById('detail-features').innerHTML =
+      p.features.map(f => `<li>${f}</li>`).join('');
+
+    panel.classList.add('open');
+    overlay.classList.add('visible');
+    body.classList.add('detail-open');
+  }
+
+  function closeDetail() {
+    panel.classList.remove('open');
+    overlay.classList.remove('visible');
+    body.classList.remove('detail-open');
+  }
+
+  document.querySelectorAll('.project-card').forEach(card => {
+    card.addEventListener('click', () => openDetail(card.dataset.project));
+  });
+
+  document.getElementById('detail-close').addEventListener('click', closeDetail);
+  overlay.addEventListener('click', closeDetail);
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') closeDetail();
+  });
+</script>
 
 
 </body>
