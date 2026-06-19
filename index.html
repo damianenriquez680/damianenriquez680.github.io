@@ -34,16 +34,12 @@
       height: 100%;
       background: var(--navy2);
       border-right: 1px solid rgba(200,169,110,0.2);
-      transform: translateX(calc(-1 * var(--sidebar-w)));
-      transition: transform var(--transition);
       z-index: 100;
       display: flex;
       flex-direction: column;
       padding: 2.5rem 2rem;
       overflow-y: auto;
     }
-
-    #sidebar.open { transform: translateX(0); }
 
     .sidebar-avatar {
       width: 72px; height: 72px;
@@ -113,55 +109,13 @@
       color: var(--accent);
     }
 
-    /* ── TOGGLE BUTTON ── */
-    #toggle {
-      position: fixed;
-      top: 1.5rem; left: 1.5rem;
-      z-index: 200;
-      background: none;
-      border: none;
-      cursor: pointer;
-      display: flex;
-      flex-direction: column;
-      gap: 5px;
-      padding: 8px;
-      transition: left var(--transition);
-    }
-
-    #toggle.shifted { left: calc(var(--sidebar-w) + 1rem); }
-
-    #toggle span {
-      display: block;
-      width: 24px; height: 2px;
-      background: var(--accent);
-      border-radius: 2px;
-      transition: transform 0.3s, opacity 0.3s;
-    }
-
-    #toggle.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
-    #toggle.open span:nth-child(2) { opacity: 0; }
-    #toggle.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
-
-    /* ── OVERLAY ── */
-    #overlay {
-      position: fixed; inset: 0;
-      background: rgba(10,15,22,0.55);
-      z-index: 90;
-      opacity: 0; pointer-events: none;
-      transition: opacity 0.3s;
-    }
-    #overlay.visible { opacity: 1; pointer-events: all; }
-
     /* ── MAIN CONTENT ── */
     main {
       min-height: 100vh;
+      margin-left: var(--sidebar-w);
       padding: 5rem 3rem 4rem;
       max-width: 860px;
-      margin: 0 auto;
-      transition: filter var(--transition);
     }
-
-    main.blurred { filter: blur(2px); pointer-events: none; }
 
     .hero {
       padding-bottom: 3rem;
@@ -256,26 +210,6 @@
       color: var(--accent);
     }
 
-    .add-card {
-      border: 1px dashed rgba(200,169,110,0.25);
-      border-radius: 10px;
-      padding: 1.5rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-direction: column;
-      gap: 0.5rem;
-      color: var(--muted);
-      font-size: 13px;
-      min-height: 140px;
-    }
-
-    .add-card-plus {
-      font-size: 28px;
-      color: rgba(200,169,110,0.3);
-      line-height: 1;
-    }
-
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(18px); }
       to   { opacity: 1; transform: translateY(0); }
@@ -286,19 +220,22 @@
     .project-card:nth-child(3) { animation-delay: 0.3s; }
 
     @media (max-width: 600px) {
-      main { padding: 4.5rem 1.5rem 3rem; }
+      #sidebar {
+        position: static;
+        width: 100%;
+        height: auto;
+        border-right: none;
+        border-bottom: 1px solid rgba(200,169,110,0.2);
+      }
+
+      main {
+        margin-left: 0;
+        padding: 2.5rem 1.5rem 3rem;
+      }
     }
   </style>
 </head>
 <body>
-
-<!-- Toggle button -->
-<button id="toggle" aria-label="Abrir menú">
-  <span></span><span></span><span></span>
-</button>
-
-<!-- Overlay -->
-<div id="overlay"></div>
 
 <!-- Sidebar -->
 <nav id="sidebar" aria-label="Información de contacto">
@@ -326,7 +263,9 @@
     <span class="tag">C#</span>
     <span class="tag">Java</span>
     <span class="tag">Python</span>
+    <span class="tag">Flask</span>
     <span class="tag">SQL Server</span>
+    <span class="tag">SQLite</span>
     <span class="tag">Visual Studio</span>
   </div>
 
@@ -349,6 +288,7 @@
     <div class="section-title">Proyectos</div>
     <div class="projects-grid">
 
+      <!-- Proyecto 1 — reemplaza href con tu link real de GitHub -->
       <a class="project-card" href="https://github.com/damianenriquez680/sistema_escolar" target="_blank">
         <div class="project-card-icon">🗃️</div>
         <div class="project-card-title">Sistema Escolar</div>
@@ -360,6 +300,7 @@
         </div>
       </a>
 
+      <!-- Proyecto 2 — reemplaza href con tu link real de GitHub -->
       <a class="project-card" href="https://github.com/damianenriquez680/calculadora_coordenadas" target="_blank">
         <div class="project-card-icon">📐</div>
         <div class="project-card-title">Calculadora de Coordenadas</div>
@@ -369,39 +310,22 @@
         </div>
       </a>
 
+      <!-- Proyecto 3 — reemplaza href con tu link real de GitHub -->
+      <a class="project-card" href="https://github.com/damianenriquez680/biblioteca_flask" target="_blank">
+        <div class="project-card-icon">📚</div>
+        <div class="project-card-title">BiblioTeca</div>
+        <div class="project-card-desc">API REST con Flask y SQLite para gestión de libros y préstamos, con interfaz HTML.</div>
+        <div class="project-card-tags">
+          <span class="project-card-tag">Flask</span>
+          <span class="project-card-tag">SQLite</span>
+          <span class="project-card-tag">Python</span>
+        </div>
+      </a>
+
     </div>
   </section>
 </main>
 
-<script>
-  const toggle = document.getElementById('toggle');
-  const sidebar = document.getElementById('sidebar');
-  const overlay = document.getElementById('overlay');
-  const mainEl = document.getElementById('main');
 
-  function openSidebar() {
-    sidebar.classList.add('open');
-    toggle.classList.add('open', 'shifted');
-    overlay.classList.add('visible');
-    mainEl.classList.add('blurred');
-  }
-
-  function closeSidebar() {
-    sidebar.classList.remove('open');
-    toggle.classList.remove('open', 'shifted');
-    overlay.classList.remove('visible');
-    mainEl.classList.remove('blurred');
-  }
-
-  toggle.addEventListener('click', () => {
-    sidebar.classList.contains('open') ? closeSidebar() : openSidebar();
-  });
-
-  overlay.addEventListener('click', closeSidebar);
-
-  document.addEventListener('keydown', e => {
-    if (e.key === 'Escape') closeSidebar();
-  });
-</script>
 </body>
 </html>
