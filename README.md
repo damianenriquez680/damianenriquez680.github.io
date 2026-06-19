@@ -8,14 +8,15 @@ Portafolio personal desarrollado con **HTML, CSS y JavaScript** puro, alojado en
 
 ## 👤 Sobre mí
 
-Estudiante de **Ingeniería en Sistemas de Información** en la Universidad de Sonora. Con interés en desarrollo de software y experiencia práctica en aplicaciones de escritorio y bases de datos relacionales.
+Estudiante de **Ingeniería en Sistemas de Información** en la Universidad de Sonora. Con interés en desarrollo de software y experiencia práctica en aplicaciones de escritorio, APIs web y bases de datos relacionales.
 
 ---
 
 ## 🛠️ Tecnologías
 
 - **Lenguajes:** C#, Java, Python
-- **Bases de datos:** SQL Server
+- **Frameworks:** Flask
+- **Bases de datos:** SQL Server, SQLite
 - **Herramientas:** Visual Studio
 
 ---
