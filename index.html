@@ -26,6 +26,31 @@
       overflow-x: hidden;
     }
 
+    /* ── SCROLLBAR ── */
+    * {
+      scrollbar-width: thin;
+      scrollbar-color: var(--accent) var(--navy2);
+    }
+
+    *::-webkit-scrollbar {
+      width: 10px;
+      height: 10px;
+    }
+
+    *::-webkit-scrollbar-track {
+      background: var(--navy2);
+    }
+
+    *::-webkit-scrollbar-thumb {
+      background: rgba(200,169,110,0.5);
+      border-radius: 10px;
+      border: 2px solid var(--navy2);
+    }
+
+    *::-webkit-scrollbar-thumb:hover {
+      background: var(--accent);
+    }
+
     /* ── SIDEBAR ── */
     #sidebar {
       position: fixed;
@@ -289,7 +314,7 @@
     <div class="projects-grid">
 
       <!-- Proyecto 1 — reemplaza href con tu link real de GitHub -->
-      <a class="project-card" href="https://github.com/damianenriquez680/sistema_escolar" target="_blank">
+      <a class="project-card" href="https://github.com/damianenriquez680" target="_blank">
         <div class="project-card-icon">🗃️</div>
         <div class="project-card-title">Sistema Escolar</div>
         <div class="project-card-desc">Aplicación de escritorio con CRUD para gestión de alumnos y base de datos relacional.</div>
@@ -301,7 +326,7 @@
       </a>
 
       <!-- Proyecto 2 — reemplaza href con tu link real de GitHub -->
-      <a class="project-card" href="https://github.com/damianenriquez680/calculadora_coordenadas" target="_blank">
+      <a class="project-card" href="https://github.com/damianenriquez680" target="_blank">
         <div class="project-card-icon">📐</div>
         <div class="project-card-title">Calculadora de Coordenadas</div>
         <div class="project-card-desc">Cálculos matemáticos en sistemas de coordenadas 2D y 3D implementados en consola.</div>
@@ -311,7 +336,7 @@
       </a>
 
       <!-- Proyecto 3 — reemplaza href con tu link real de GitHub -->
-      <a class="project-card" href="https://github.com/damianenriquez680/biblioteca_flask" target="_blank">
+      <a class="project-card" href="https://github.com/damianenriquez680" target="_blank">
         <div class="project-card-icon">📚</div>
         <div class="project-card-title">BiblioTeca</div>
         <div class="project-card-desc">API REST con Flask y SQLite para gestión de libros y préstamos, con interfaz HTML.</div>
