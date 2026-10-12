@@ -1,618 +1,570 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" data-bs-theme="dark">
 <head>
   <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Damian Enríquez — Portafolio</title>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Damian Enriquez — Portafolio</title>
 
-    :root {
+  <!-- Bootstrap 5 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <!-- Fuentes -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+
+  <style>
+    /* ── TEMA: se sobreescriben las variables de Bootstrap ── */
+    [data-bs-theme="dark"] {
       --navy: #0f1923;
       --navy2: #1a2736;
       --accent: #c8a96e;
-      --text: #e8e2d9;
-      --muted: #8a9bb0;
-      --sidebar-w: 300px;
-      --detail-w: 340px;
-      --transition: 0.4s cubic-bezier(0.77,0,0.18,1);
+      --accent-soft: rgba(200,169,110,0.35);
+      --line: rgba(200,169,110,0.2);
+
+      --bs-body-bg: var(--navy);
+      --bs-body-color: #e8e2d9;
+      --bs-secondary-color: #8a9bb0;
+      --bs-body-font-family: 'DM Sans', system-ui, sans-serif;
+      --bs-border-color: var(--line);
+      --bs-link-color: var(--accent);
+      --bs-link-hover-color: #dcc189;
     }
 
-    html, body {
-      height: 100%;
-      background: var(--navy);
-      color: var(--text);
-      font-family: 'DM Sans', sans-serif;
-      overflow-x: hidden;
-    }
+    html { scroll-behavior: smooth; }
+    h1, h2, h3, h4, h5, .font-display { font-family: 'Playfair Display', Georgia, serif; font-weight: 400; }
+    .text-accent { color: var(--accent) !important; }
 
-    /* ── SCROLLBAR ── */
-    * {
-      scrollbar-width: thin;
-      scrollbar-color: var(--accent) var(--navy2);
-    }
-
-    *::-webkit-scrollbar {
-      width: 10px;
-      height: 10px;
-    }
-
-    *::-webkit-scrollbar-track {
-      background: var(--navy2);
-    }
-
-    *::-webkit-scrollbar-thumb {
-      background: rgba(200,169,110,0.5);
-      border-radius: 10px;
-      border: 2px solid var(--navy2);
-    }
-
-    *::-webkit-scrollbar-thumb:hover {
-      background: var(--accent);
-    }
+    * { scrollbar-width: thin; scrollbar-color: var(--accent) var(--navy2); }
 
     /* ── SIDEBAR ── */
-    #sidebar {
-      position: fixed;
-      top: 0; left: 0;
-      width: var(--sidebar-w);
-      height: 100%;
+    .sidebar {
       background: var(--navy2);
-      border-right: 1px solid rgba(200,169,110,0.2);
-      z-index: 100;
-      display: flex;
-      flex-direction: column;
-      padding: 2.5rem 2rem;
-      overflow-y: auto;
+      border-bottom: 1px solid var(--line);
+    }
+    @media (min-width: 992px) {
+      .sidebar {
+        position: sticky; top: 0;
+        height: 100vh; overflow-y: auto;
+        border-bottom: 0;
+        border-right: 1px solid var(--line);
+      }
     }
 
-    .sidebar-avatar {
+    .avatar {
       width: 72px; height: 72px;
       border-radius: 50%;
       background: linear-gradient(135deg, var(--accent), #8b6e3a);
-      display: flex; align-items: center; justify-content: center;
+      color: var(--navy);
       font-family: 'Playfair Display', serif;
       font-size: 28px;
-      color: var(--navy);
-      margin-bottom: 1.2rem;
-      flex-shrink: 0;
     }
 
-    .sidebar-name {
-      font-family: 'Playfair Display', serif;
-      font-size: 22px;
-      font-weight: 400;
-      color: var(--text);
-      line-height: 1.2;
-      margin-bottom: 4px;
-    }
-
-    .sidebar-role {
-      font-size: 11px;
-      letter-spacing: 2px;
+    .sidebar-label {
+      font-size: .7rem;
+      letter-spacing: .15em;
       text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 2rem;
+      color: var(--bs-secondary-color);
     }
+    .sidebar hr { border-color: var(--line); opacity: 1; }
+    .sidebar a { text-decoration: none; }
+    .sidebar a:hover { text-decoration: underline; }
 
-    .sidebar-divider {
-      height: 1px;
-      background: rgba(200,169,110,0.2);
-      margin: 1.2rem 0;
-    }
-
-    .sidebar-section-label {
-      font-size: 10px;
-      letter-spacing: 2.5px;
-      text-transform: uppercase;
-      color: var(--muted);
-      margin-bottom: 0.6rem;
-    }
-
-    .sidebar-item {
-      font-size: 13px;
-      color: var(--text);
-      line-height: 1.9;
-      opacity: 0.85;
-    }
-
-    .sidebar-item a {
-      color: var(--accent);
-      text-decoration: none;
-      font-size: 13px;
-    }
-
-    .sidebar-item a:hover { text-decoration: underline; }
-
-    .tag-row { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
-
+    /* ── ETIQUETAS (badges) ── */
     .tag {
-      font-size: 11px;
-      padding: 3px 10px;
-      border: 1px solid rgba(200,169,110,0.35);
-      border-radius: 20px;
+      background: transparent;
       color: var(--accent);
+      border: 1px solid var(--accent-soft);
+      font-weight: 400;
+      padding: .4em .85em;
     }
 
-    /* ── MAIN CONTENT ── */
-    main {
-      min-height: 100vh;
-      margin-left: var(--sidebar-w);
-      padding: 5rem 3rem 4rem;
-      max-width: 860px;
-      transition: margin-right var(--transition);
+    /* ── NAV SUPERIOR ── */
+    .site-nav {
+      background: rgba(15,25,35,0.88);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--line);
+      z-index: 90;
+      --bs-nav-link-color: var(--bs-secondary-color);
+      --bs-nav-link-hover-color: var(--accent);
+      --bs-nav-underline-link-active-color: var(--accent);
+      --bs-nav-underline-border-width: 2px;
+      --bs-nav-underline-gap: 1.5rem;
     }
+    .site-nav .nav-link { padding-left: 0; padding-right: 0; }
+    .site-nav .nav-link.active { border-bottom-color: var(--accent); }
+    #inicio, #proyectos { scroll-margin-top: 5rem; }
 
-    body.detail-open main {
-      margin-right: var(--detail-w);
-    }
-
-    .hero {
-      padding-bottom: 3rem;
-      border-bottom: 1px solid rgba(200,169,110,0.15);
-      margin-bottom: 3rem;
-      animation: fadeUp 0.7s ease both;
-    }
-
-    .hero-label {
-      font-size: 11px;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 1rem;
-    }
-
+    /* ── HERO ── */
     .hero-name {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(36px, 7vw, 64px);
-      font-weight: 400;
+      font-size: clamp(2.5rem, 7vw, 4.5rem);
       line-height: 1.05;
-      color: var(--text);
-      margin-bottom: 1.2rem;
     }
+    .hero-desc { max-width: 38rem; line-height: 1.75; }
 
-    .hero-desc {
-      font-size: 16px;
-      color: var(--muted);
-      line-height: 1.75;
-      max-width: 540px;
+    @media (prefers-reduced-motion: no-preference) {
+      .hero { animation: fadeUp .7s ease both; }
     }
-
-    /* ── PROJECTS SECTION ── */
-    .section-title {
-      font-size: 11px;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 1.5rem;
-    }
-
-    .projects-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 1.2rem;
-    }
-
-    .project-card {
-      background: var(--navy2);
-      border: 1px solid rgba(200,169,110,0.15);
-      border-radius: 10px;
-      padding: 1.5rem;
-      text-decoration: none;
-      color: inherit;
-      display: block;
-      width: 100%;
-      text-align: left;
-      font-family: inherit;
-      transition: border-color 0.25s, transform 0.25s;
-      animation: fadeUp 0.7s ease both;
-      cursor: pointer;
-    }
-
-    .project-card:hover {
-      border-color: rgba(200,169,110,0.5);
-      transform: translateY(-3px);
-    }
-
-    .project-card-icon {
-      font-size: 22px;
-      margin-bottom: 0.8rem;
-    }
-
-    .project-card-title {
-      font-family: 'Playfair Display', serif;
-      font-size: 17px;
-      font-weight: 400;
-      color: var(--text);
-      margin-bottom: 0.5rem;
-    }
-
-    .project-card-desc {
-      font-size: 13px;
-      color: var(--muted);
-      line-height: 1.65;
-      margin-bottom: 1rem;
-    }
-
-    .project-card-tags { display: flex; flex-wrap: wrap; gap: 5px; }
-
-    .project-card-tag {
-      font-size: 11px;
-      padding: 2px 9px;
-      border: 1px solid rgba(200,169,110,0.3);
-      border-radius: 20px;
-      color: var(--accent);
-    }
-
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(18px); }
-      to   { opacity: 1; transform: translateY(0); }
+      to   { opacity: 1; transform: none; }
     }
 
-    .project-card:nth-child(1) { animation-delay: 0.1s; }
-    .project-card:nth-child(2) { animation-delay: 0.2s; }
-    .project-card:nth-child(3) { animation-delay: 0.3s; }
-
-    /* ── PROJECT DETAIL PANEL ── */
-    #detail-panel {
-      position: fixed;
-      top: 0; right: 0;
-      width: 0;
-      height: 100%;
-      background: var(--navy2);
-      border-left: 1px solid rgba(200,169,110,0.2);
-      z-index: 150;
-      overflow: hidden;
-      transition: width var(--transition);
+    /* ── BOTONES ── */
+    .btn-accent {
+      --bs-btn-color: var(--navy);
+      --bs-btn-bg: var(--accent);
+      --bs-btn-border-color: var(--accent);
+      --bs-btn-hover-color: var(--navy);
+      --bs-btn-hover-bg: #dcc189;
+      --bs-btn-hover-border-color: #dcc189;
+      --bs-btn-active-color: var(--navy);
+      --bs-btn-active-bg: #b8995f;
+      --bs-btn-active-border-color: #b8995f;
+      font-weight: 500;
+    }
+    .btn-outline-accent {
+      --bs-btn-color: var(--accent);
+      --bs-btn-border-color: var(--accent-soft);
+      --bs-btn-hover-color: var(--navy);
+      --bs-btn-hover-bg: var(--accent);
+      --bs-btn-hover-border-color: var(--accent);
+      --bs-btn-active-color: var(--navy);
+      --bs-btn-active-bg: var(--accent);
     }
 
-    #detail-panel.open {
-      width: var(--detail-w);
-    }
+    /* ── TARJETAS DE PROYECTO ── */
+    #proyectos { scroll-margin-top: 2rem; }
 
-    .detail-inner {
-      width: var(--detail-w);
-      height: 100%;
-      padding: 2.5rem 2rem;
-      overflow-y: auto;
-      display: flex;
-      flex-direction: column;
+    .project-card {
+      --bs-card-bg: var(--navy2);
+      --bs-card-border-color: rgba(200,169,110,0.15);
+      --bs-card-border-radius: .75rem;
+      --bs-card-spacer-y: 1.5rem;
+      --bs-card-spacer-x: 1.5rem;
+      text-align: left;
+      color: inherit;
+      font: inherit;
+      width: 100%;
+      transition: border-color .25s, transform .25s, box-shadow .25s;
     }
-
-    .detail-close {
-      align-self: flex-start;
-      background: none;
-      border: 1px solid rgba(200,169,110,0.3);
-      color: var(--accent);
-      font-size: 13px;
-      padding: 6px 14px;
-      border-radius: 20px;
-      cursor: pointer;
-      margin-bottom: 2rem;
-      transition: background 0.2s, border-color 0.2s;
-    }
-
-    .detail-close:hover {
-      background: rgba(200,169,110,0.1);
+    .project-card:hover,
+    .project-card:focus-visible,
+    .project-card.selected {
       border-color: var(--accent);
+      box-shadow: 0 0 0 1px rgba(200,169,110,.35),
+                  0 0 22px rgba(200,169,110,.28);
     }
+    .project-card:hover { transform: translateY(-3px); }
+    .project-card:focus-visible { outline: none; }
+    .project-card.selected { background: #1f2f42; }
+    .project-icon { font-size: 1.6rem; }
+    .project-card .card-title { font-family: 'Playfair Display', serif; font-size: 1.1rem; }
 
-    .detail-icon {
-      font-size: 30px;
-      margin-bottom: 0.8rem;
+    /* ── PANEL DE DETALLE (Offcanvas) ── */
+    #detailPanel {
+      --bs-offcanvas-width: 420px;
+      --bs-offcanvas-bg: var(--navy2);
+      --bs-offcanvas-border-color: var(--line);
     }
-
-    .detail-title {
-      font-family: 'Playfair Display', serif;
-      font-size: 26px;
-      font-weight: 400;
-      color: var(--text);
-      line-height: 1.15;
-      margin-bottom: 0.8rem;
-    }
-
-    .detail-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 1.6rem; }
-
-    .detail-section-label {
-      font-size: 10px;
-      letter-spacing: 2.5px;
+    .detail-label {
+      font-size: .7rem;
+      letter-spacing: .15em;
       text-transform: uppercase;
-      color: var(--muted);
-      margin: 1.4rem 0 0.6rem;
+      color: var(--accent);
     }
-
-    .detail-desc {
-      font-size: 14px;
-      color: var(--text);
-      opacity: 0.85;
-      line-height: 1.75;
-    }
-
-    .detail-features {
-      list-style: none;
-      font-size: 13px;
-      color: var(--text);
-      opacity: 0.85;
-      line-height: 1.9;
-    }
-
-    .detail-features li {
-      padding-left: 16px;
+    .detail-features .list-group-item {
+      background: transparent;
+      border-color: rgba(200,169,110,.12);
+      color: #e8e2d9;
+      font-size: .9rem;
+      padding-left: 1.4rem;
       position: relative;
     }
-
-    .detail-features li::before {
+    .detail-features .list-group-item::before {
       content: "—";
-      position: absolute;
-      left: 0;
+      position: absolute; left: 0;
       color: var(--accent);
-    }
-
-    .detail-repo-btn {
-      margin-top: 2rem;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      background: var(--accent);
-      color: var(--navy);
-      font-size: 13px;
-      font-weight: 500;
-      text-decoration: none;
-      padding: 12px 20px;
-      border-radius: 8px;
-      transition: opacity 0.2s, transform 0.2s;
-    }
-
-    .detail-repo-btn:hover {
-      opacity: 0.88;
-      transform: translateY(-2px);
-    }
-
-    /* ── DETAIL OVERLAY (móvil) ── */
-    #detail-overlay {
-      display: none;
-    }
-
-    @media (max-width: 600px) {
-      #sidebar {
-        position: static;
-        width: 100%;
-        height: auto;
-        border-right: none;
-        border-bottom: 1px solid rgba(200,169,110,0.2);
-      }
-
-      body.detail-open main { margin-right: 0; }
-
-      main {
-        margin-left: 0;
-        padding: 2.5rem 1.5rem 3rem;
-      }
-
-      #detail-panel {
-        width: 0;
-      }
-
-      #detail-panel.open {
-        width: 100%;
-      }
-
-      .detail-inner { width: 100%; }
-
-      #detail-overlay {
-        display: block;
-        position: fixed; inset: 0;
-        background: rgba(10,15,22,0.6);
-        z-index: 140;
-        opacity: 0; pointer-events: none;
-        transition: opacity 0.3s;
-      }
-
-      #detail-overlay.visible { opacity: 1; pointer-events: all; }
     }
   </style>
 </head>
-<body>
+<body data-bs-spy="scroll" data-bs-target="#siteNav" data-bs-root-margin="-20% 0px -60% 0px" tabindex="0">
 
-<!-- Project detail panel -->
-<aside id="detail-panel" aria-label="Detalle del proyecto">
-  <div class="detail-inner">
-    <button class="detail-close" id="detail-close">Cerrar →</button>
-    <div class="detail-icon" id="detail-icon"></div>
-    <div class="detail-title" id="detail-title"></div>
-    <div class="detail-tags" id="detail-tags"></div>
-
-    <div class="detail-section-label">Descripción</div>
-    <p class="detail-desc" id="detail-desc"></p>
-
-    <div class="detail-section-label">Funcionalidades destacadas</div>
-    <ul class="detail-features" id="detail-features"></ul>
-
-    <a class="detail-repo-btn" id="detail-repo" href="#" target="_blank">Ver repositorio →</a>
+<!-- Panel de detalle del proyecto (Bootstrap Offcanvas) -->
+<div class="offcanvas offcanvas-end" tabindex="-1" id="detailPanel" aria-labelledby="detail-title">
+  <div class="offcanvas-header border-bottom" style="border-color: var(--line) !important;">
+    <span class="project-icon" id="detail-icon"></span>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Cerrar" data-i18n-aria="close"></button>
   </div>
-</aside>
+  <div class="offcanvas-body p-4">
+    <h2 class="h4 mb-3" id="detail-title"></h2>
+    <div class="d-flex flex-wrap gap-2 mb-4" id="detail-tags"></div>
 
-<div id="detail-overlay"></div>
+    <div class="detail-label mb-2" data-i18n="detail_desc">Descripción</div>
+    <p class="text-secondary" id="detail-desc"></p>
 
-<!-- Sidebar -->
-<nav id="sidebar" aria-label="Información de contacto">
-  <div class="sidebar-avatar">DE</div>
-  <div class="sidebar-name">Damian Enríquez</div>
-  <div class="sidebar-role">Ing. Sistemas de Información</div>
+    <div class="detail-label mt-4 mb-2" data-i18n="detail_features">Funcionalidades destacadas</div>
+    <ul class="list-group list-group-flush detail-features" id="detail-features"></ul>
 
-  <div class="sidebar-section-label">Contacto</div>
-  <div class="sidebar-item"><a href="mailto:damianenriquez680@gmail.com">damianenriquez680@gmail.com</a></div>
-  <div class="sidebar-item">637 132 3711</div>
-  <div class="sidebar-item"><a href="https://github.com/damianenriquez680" target="_blank">github.com/damianenriquez680</a></div>
-  <div class="sidebar-item">Hermosillo, Sonora</div>
-
-  <div class="sidebar-divider"></div>
-
-  <div class="sidebar-section-label">Formación</div>
-  <div class="sidebar-item" style="font-weight:500">Ing. en Sistemas de Información</div>
-  <div class="sidebar-item">Universidad de Sonora</div>
-  <div class="sidebar-item" style="color:var(--muted);font-size:12px">En curso</div>
-
-  <div class="sidebar-divider"></div>
-
-  <div class="sidebar-section-label">Tecnologías</div>
-  <div class="tag-row">
-    <span class="tag">C#</span>
-    <span class="tag">Java</span>
-    <span class="tag">Python</span>
-    <span class="tag">Flask</span>
-    <span class="tag">SQL Server</span>
-    <span class="tag">SQLite</span>
-    <span class="tag">Visual Studio</span>
+    <a class="btn btn-accent w-100 mt-4" id="detail-repo" href="#" target="_blank" rel="noopener" data-i18n="btn_repo">Ver repositorio</a>
   </div>
+</div>
 
-  <div class="sidebar-divider"></div>
+<div class="container-fluid">
+  <div class="row">
 
-  <div class="sidebar-section-label">Idiomas</div>
-  <div class="sidebar-item">Español — Nativo</div>
-  <div class="sidebar-item">Inglés — B1</div>
-</nav>
+    <!-- Sidebar -->
+    <aside class="col-lg-4 col-xl-3 sidebar p-4 px-lg-4 py-lg-5" aria-label="Información de contacto" data-i18n-aria="aside_label">
+      <div class="avatar d-flex align-items-center justify-content-center mb-3">DE</div>
+      <h2 class="h4 mb-1">Damian Enriquez</h2>
+      <div class="small text-accent mb-4" data-i18n="sidebar_role">Ing. Sistemas de Información</div>
 
-<!-- Main -->
-<main id="main">
-  <section class="hero">
-    <div class="hero-label">Portafolio</div>
-    <h1 class="hero-name">Damian<br>Enríquez</h1>
-    <p class="hero-desc">Estudiante de Ingeniería en Sistemas de Información en la Universidad de Sonora. Desarrollo aplicaciones de escritorio con C# y bases de datos relacionales con SQL Server.</p>
-  </section>
+      <div class="sidebar-label mb-2" data-i18n="label_contact">Contacto</div>
+      <div class="small lh-lg">
+        <div><a href="mailto:damianenriquez680@gmail.com">damianenriquez680@gmail.com</a></div>
+        <div>637 132 3711</div>
+        <div><a href="https://github.com/damianenriquez680" target="_blank" rel="noopener">github.com/damianenriquez680</a></div>
+        <div>Hermosillo, Sonora</div>
+      </div>
 
-  <section>
-    <div class="section-title">Proyectos</div>
-    <div class="projects-grid">
+      <hr class="my-4"/>
 
-      <!-- Proyecto 1 -->
-      <button class="project-card" data-project="sistema-escolar">
-        <div class="project-card-icon">🗃️</div>
-        <div class="project-card-title">Sistema Escolar</div>
-        <div class="project-card-desc">Aplicación de escritorio con CRUD para gestión de alumnos y base de datos relacional.</div>
-        <div class="project-card-tags">
-          <span class="project-card-tag">C#</span>
-          <span class="project-card-tag">SQL Server</span>
-          <span class="project-card-tag">Windows Forms</span>
+      <div class="sidebar-label mb-2" data-i18n="label_education">Formación</div>
+      <div class="small lh-lg">
+        <div class="fw-medium" data-i18n="edu_degree">Ing. en Sistemas de Información</div>
+        <div data-i18n="edu_school">Universidad de Sonora</div>
+        <div class="text-secondary" data-i18n="edu_status">En curso</div>
+      </div>
+
+      <hr class="my-4"/>
+
+      <div class="sidebar-label mb-2" data-i18n="label_tech">Tecnologías</div>
+      <div class="d-flex flex-wrap gap-2">
+        <span class="badge rounded-pill tag">C#</span>
+        <span class="badge rounded-pill tag">Java</span>
+        <span class="badge rounded-pill tag">Python</span>
+        <span class="badge rounded-pill tag">Flask</span>
+        <span class="badge rounded-pill tag">SQL Server</span>
+        <span class="badge rounded-pill tag">SQLite</span>
+        <span class="badge rounded-pill tag">Visual Studio</span>
+      </div>
+
+      <hr class="my-4"/>
+
+      <div class="sidebar-label mb-2" data-i18n="label_languages">Idiomas</div>
+      <div class="small lh-lg">
+        <div data-i18n="lang_es">Español — Nativo</div>
+        <div data-i18n="lang_en">Inglés — B1</div>
+      </div>
+    </aside>
+
+    <!-- Contenido principal -->
+    <main class="col-lg-8 col-xl-9 p-0">
+
+      <!-- Navegación: agrega aquí más enlaces cuando tengas más secciones -->
+      <nav id="siteNav" class="site-nav sticky-top" aria-label="Secciones" data-i18n-aria="nav_label">
+        <div class="mx-auto px-4 px-md-5 d-flex align-items-center" style="max-width: 960px;">
+          <ul class="nav nav-underline">
+            <li class="nav-item"><a class="nav-link" href="#inicio" data-i18n="nav_home">Inicio</a></li>
+            <li class="nav-item"><a class="nav-link" href="#proyectos" data-i18n="nav_projects">Proyectos</a></li>
+          </ul>
+          <!-- Cambio de idioma: alineado a la derecha -->
+          <button type="button" id="langToggle" class="btn btn-outline-accent btn-sm ms-auto">English</button>
         </div>
-      </button>
+      </nav>
 
-      <!-- Proyecto 2 -->
-      <button class="project-card" data-project="calculadora">
-        <div class="project-card-icon">📐</div>
-        <div class="project-card-title">Calculadora de Coordenadas</div>
-        <div class="project-card-desc">Cálculos matemáticos en sistemas de coordenadas 2D y 3D implementados en consola.</div>
-        <div class="project-card-tags">
-          <span class="project-card-tag">Java</span>
-        </div>
-      </button>
+      <div class="mx-auto px-4 px-md-5 pb-5 pt-5" style="max-width: 960px;">
 
-      <!-- Proyecto 3 -->
-      <button class="project-card" data-project="biblioteca">
-        <div class="project-card-icon">📚</div>
-        <div class="project-card-title">BiblioTeca</div>
-        <div class="project-card-desc">API REST con Flask y SQLite para gestión de libros y préstamos, con interfaz HTML.</div>
-        <div class="project-card-tags">
-          <span class="project-card-tag">Flask</span>
-          <span class="project-card-tag">SQLite</span>
-          <span class="project-card-tag">Python</span>
-        </div>
-      </button>
+        <section id="inicio" class="hero pb-5 mb-5 border-bottom">
+          <div class="sidebar-label text-accent mb-3" data-i18n="hero_label">Portafolio</div>
+          <h1 class="hero-name mb-4">Damian<br>Enriquez</h1>
+          <p class="hero-desc text-secondary fs-5 mb-4" data-i18n="hero_desc">
+            Estudiante de Ingeniería en Sistemas de Información en la Universidad de Sonora.
+            Desarrollo aplicaciones de escritorio con C# y bases de datos relacionales con SQL Server.
+          </p>
+          <div class="d-flex flex-wrap gap-2">
+            <a href="#proyectos" class="btn btn-accent px-4" data-i18n="btn_projects">Ver proyectos</a>
+            <a href="https://github.com/damianenriquez680" target="_blank" rel="noopener" class="btn btn-outline-accent px-4">GitHub</a>
+          </div>
+        </section>
 
-    </div>
-  </section>
-</main>
+        <section id="proyectos">
+          <h2 class="h5 text-accent mb-4" data-i18n="projects_title">Proyectos</h2>
 
+          <div class="row row-cols-1 row-cols-md-2 row-cols-xl-3 g-4">
+
+            <div class="col">
+              <button type="button" class="card project-card h-100" data-project="sistema-escolar"
+                      data-bs-toggle="offcanvas" data-bs-target="#detailPanel" aria-controls="detailPanel">
+                <div class="card-body">
+                  <div class="project-icon mb-3">🗃️</div>
+                  <h3 class="card-title" data-i18n="card_escolar_title">Sistema Escolar</h3>
+                  <p class="card-text small text-secondary" data-i18n="card_escolar_desc">Aplicación de escritorio con CRUD para gestión de alumnos y base de datos relacional.</p>
+                </div>
+                <div class="card-footer bg-transparent border-0 pt-0 px-4 pb-4 d-flex flex-wrap gap-2">
+                  <span class="badge rounded-pill tag">C#</span>
+                  <span class="badge rounded-pill tag">SQL Server</span>
+                  <span class="badge rounded-pill tag">Windows Forms</span>
+                </div>
+              </button>
+            </div>
+
+            <div class="col">
+              <button type="button" class="card project-card h-100" data-project="calculadora"
+                      data-bs-toggle="offcanvas" data-bs-target="#detailPanel" aria-controls="detailPanel">
+                <div class="card-body">
+                  <div class="project-icon mb-3">📐</div>
+                  <h3 class="card-title" data-i18n="card_calc_title">Calculadora de Coordenadas</h3>
+                  <p class="card-text small text-secondary" data-i18n="card_calc_desc">Cálculos matemáticos en sistemas de coordenadas 2D y 3D implementados en consola.</p>
+                </div>
+                <div class="card-footer bg-transparent border-0 pt-0 px-4 pb-4 d-flex flex-wrap gap-2">
+                  <span class="badge rounded-pill tag">Java</span>
+                </div>
+              </button>
+            </div>
+
+            <div class="col">
+              <button type="button" class="card project-card h-100" data-project="biblioteca"
+                      data-bs-toggle="offcanvas" data-bs-target="#detailPanel" aria-controls="detailPanel">
+                <div class="card-body">
+                  <div class="project-icon mb-3">📚</div>
+                  <h3 class="card-title">BiblioTeca</h3>
+                  <p class="card-text small text-secondary" data-i18n="card_biblio_desc">API REST con Flask y SQLite para gestión de libros y préstamos, con interfaz HTML.</p>
+                </div>
+                <div class="card-footer bg-transparent border-0 pt-0 px-4 pb-4 d-flex flex-wrap gap-2">
+                  <span class="badge rounded-pill tag">Flask</span>
+                  <span class="badge rounded-pill tag">SQLite</span>
+                  <span class="badge rounded-pill tag">Python</span>
+                </div>
+              </button>
+            </div>
+
+          </div>
+        </section>
+
+      </div>
+    </main>
+
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script>
-  const projects = {
-    'sistema-escolar': {
-      icon: '🗃️',
-      title: 'Sistema Escolar con Base de Datos',
-      tags: ['C#', 'SQL Server', 'Windows Forms'],
-      desc: 'Aplicación de escritorio para la gestión académica de una institución educativa, con operaciones CRUD completas sobre una base de datos relacional de 11 tablas interconectadas: alumnos, académicos, materias, grupos, aulas, carreras y más.',
-      features: [
-        'Catálogos de Materia, Aula, Académico, Alumno, Carrera, Ciudad, Estado, País y Estatus',
-        'Gestión de Grupos con maestro, aula, horario y carrera asignados',
-        'Registro de Reinscripciones con calificaciones',
-        'Interfaz Windows Forms con navegación centralizada',
-        'Proyecto en equipo — Desarrollo de Sistemas 3'
-      ],
-      repo: 'https://github.com/damianenriquez680/sistema_escolar'
+  // ── Textos de la interfaz en cada idioma ──
+  const i18n = {
+    es: {
+      page_title: 'Damian Enriquez — Portafolio',
+      toggle_label: 'English',
+      toggle_aria: 'Cambiar el idioma a inglés',
+      close: 'Cerrar',
+      aside_label: 'Información de contacto',
+      nav_label: 'Secciones',
+      nav_home: 'Inicio',
+      nav_projects: 'Proyectos',
+      sidebar_role: 'Ing. Sistemas de Información',
+      label_contact: 'Contacto',
+      label_education: 'Formación',
+      edu_degree: 'Ing. en Sistemas de Información',
+      edu_school: 'Universidad de Sonora',
+      edu_status: 'En curso',
+      label_tech: 'Tecnologías',
+      label_languages: 'Idiomas',
+      lang_es: 'Español — Nativo',
+      lang_en: 'Inglés — B1',
+      hero_label: 'Portafolio',
+      hero_desc: 'Estudiante de Ingeniería en Sistemas de Información en la Universidad de Sonora. Desarrollo aplicaciones de escritorio con C# y bases de datos relacionales con SQL Server.',
+      btn_projects: 'Ver proyectos',
+      projects_title: 'Proyectos',
+      card_escolar_title: 'Sistema Escolar',
+      card_escolar_desc: 'Aplicación de escritorio con CRUD para gestión de alumnos y base de datos relacional.',
+      card_calc_title: 'Calculadora de Coordenadas',
+      card_calc_desc: 'Cálculos matemáticos en sistemas de coordenadas 2D y 3D implementados en consola.',
+      card_biblio_desc: 'API REST con Flask y SQLite para gestión de libros y préstamos, con interfaz HTML.',
+      detail_desc: 'Descripción',
+      detail_features: 'Funcionalidades destacadas',
+      btn_repo: 'Ver repositorio'
     },
-    'calculadora': {
-      icon: '📐',
-      title: 'Calculadora de Sistemas de Coordenadas',
-      tags: ['Java'],
-      desc: 'Aplicación de consola que realiza conversiones entre sistemas de coordenadas y calcula distancias entre puntos, tanto en dos como en tres dimensiones.',
-      features: [
-        'Conversión 2D: rectangulares ↔ polares',
-        'Conversión 3D: rectangulares, cilíndricas y esféricas entre sí',
-        'Cálculo de distancia entre puntos en cualquier combinación de sistemas',
-        'Código organizado en clases por tipo de coordenada'
-      ],
-      repo: 'https://github.com/damianenriquez680/calculadora_coordenadas'
-    },
-    'biblioteca': {
-      icon: '📚',
-      title: 'BiblioTeca — Sistema de Gestión de Biblioteca',
-      tags: ['Flask', 'SQLite', 'Python'],
-      desc: 'API REST construida con Flask y SQLite para administrar libros y préstamos de una biblioteca, con interfaz HTML conectada al backend.',
-      features: [
-        'Endpoints REST completos para libros y préstamos',
-        'Control automático de stock al crear o eliminar préstamos',
-        'Validación de email, ISBN y año de publicación',
-        'Queries parametrizadas para prevenir inyección SQL',
-        'Estadísticas generales vía endpoint /stats',
-        'Proyecto en equipo'
-      ],
-      repo: 'https://github.com/damianenriquez680/biblioteca_flask'
+    en: {
+      page_title: 'Damian Enriquez — Portfolio',
+      toggle_label: 'Español',
+      toggle_aria: 'Switch language to Spanish',
+      close: 'Close',
+      aside_label: 'Contact information',
+      nav_label: 'Sections',
+      nav_home: 'Home',
+      nav_projects: 'Projects',
+      sidebar_role: 'Information Systems Eng.',
+      label_contact: 'Contact',
+      label_education: 'Education',
+      edu_degree: 'Information Systems Engineering',
+      edu_school: 'University of Sonora',
+      edu_status: 'In progress',
+      label_tech: 'Technologies',
+      label_languages: 'Languages',
+      lang_es: 'Spanish — Native',
+      lang_en: 'English — B1',
+      hero_label: 'Portfolio',
+      hero_desc: 'Information Systems Engineering student at the University of Sonora. I build desktop applications with C# and relational databases with SQL Server.',
+      btn_projects: 'View projects',
+      projects_title: 'Projects',
+      card_escolar_title: 'School System',
+      card_escolar_desc: 'Desktop application with CRUD operations to manage students, backed by a relational database.',
+      card_calc_title: 'Coordinate Calculator',
+      card_calc_desc: 'Math calculations in 2D and 3D coordinate systems, implemented as a console app.',
+      card_biblio_desc: 'REST API with Flask and SQLite to manage books and loans, with an HTML interface.',
+      detail_desc: 'Description',
+      detail_features: 'Highlighted features',
+      btn_repo: 'View repository'
     }
   };
 
-  const panel = document.getElementById('detail-panel');
-  const overlay = document.getElementById('detail-overlay');
-  const body = document.body;
+  // ── Detalle de cada proyecto en cada idioma ──
+  const projects = {
+    'sistema-escolar': {
+      icon: '🗃️',
+      tags: ['C#', 'SQL Server', 'Windows Forms'],
+      repo: 'https://github.com/damianenriquez680/sistema_escolar',
+      es: {
+        title: 'Sistema Escolar con Base de Datos',
+        desc: 'Aplicación de escritorio para la gestión académica de una institución educativa, con operaciones CRUD completas sobre una base de datos relacional de 11 tablas interconectadas: alumnos, académicos, materias, grupos, aulas, carreras y más.',
+        features: [
+          'Catálogos de Materia, Aula, Académico, Alumno, Carrera, Ciudad, Estado, País y Estatus',
+          'Gestión de Grupos con maestro, aula, horario y carrera asignados',
+          'Registro de Reinscripciones con calificaciones',
+          'Interfaz Windows Forms con navegación centralizada',
+          'Proyecto en equipo — Desarrollo de Sistemas 3'
+        ]
+      },
+      en: {
+        title: 'School System with Database',
+        desc: 'Desktop application for the academic management of an educational institution, with full CRUD operations over a relational database of 11 interconnected tables: students, faculty, subjects, groups, classrooms, degree programs and more.',
+        features: [
+          'Catalogs for Subject, Classroom, Faculty, Student, Degree Program, City, State, Country and Status',
+          'Group management with assigned teacher, classroom, schedule and degree program',
+          'Re-enrollment records with grades',
+          'Windows Forms interface with centralized navigation',
+          'Team project — Systems Development 3'
+        ]
+      }
+    },
+    'calculadora': {
+      icon: '📐',
+      tags: ['Java'],
+      repo: 'https://github.com/damianenriquez680/calculadora_coordenadas',
+      es: {
+        title: 'Calculadora de Sistemas de Coordenadas',
+        desc: 'Aplicación de consola que realiza conversiones entre sistemas de coordenadas y calcula distancias entre puntos, tanto en dos como en tres dimensiones.',
+        features: [
+          'Conversión 2D: rectangulares ↔ polares',
+          'Conversión 3D: rectangulares, cilíndricas y esféricas entre sí',
+          'Cálculo de distancia entre puntos en cualquier combinación de sistemas',
+          'Código organizado en clases por tipo de coordenada'
+        ]
+      },
+      en: {
+        title: 'Coordinate Systems Calculator',
+        desc: 'Console application that converts between coordinate systems and calculates distances between points, in both two and three dimensions.',
+        features: [
+          '2D conversion: rectangular ↔ polar',
+          '3D conversion: rectangular, cylindrical and spherical, in any direction',
+          'Distance between points in any combination of systems',
+          'Code organized into classes by coordinate type'
+        ]
+      }
+    },
+    'biblioteca': {
+      icon: '📚',
+      tags: ['Flask', 'SQLite', 'Python'],
+      repo: 'https://github.com/damianenriquez680/biblioteca_flask',
+      es: {
+        title: 'BiblioTeca — Sistema de Gestión de Biblioteca',
+        desc: 'API REST construida con Flask y SQLite para administrar libros y préstamos de una biblioteca, con interfaz HTML conectada al backend.',
+        features: [
+          'Endpoints REST completos para libros y préstamos',
+          'Control automático de stock al crear o eliminar préstamos',
+          'Validación de email, ISBN y año de publicación',
+          'Queries parametrizadas para prevenir inyección SQL',
+          'Estadísticas generales vía endpoint /stats',
+          'Proyecto en equipo'
+        ]
+      },
+      en: {
+        title: 'BiblioTeca — Library Management System',
+        desc: 'REST API built with Flask and SQLite to manage a library\'s books and loans, with an HTML interface connected to the backend.',
+        features: [
+          'Complete REST endpoints for books and loans',
+          'Automatic stock control when creating or deleting loans',
+          'Email, ISBN and publication year validation',
+          'Parameterized queries to prevent SQL injection',
+          'General statistics via the /stats endpoint',
+          'Team project'
+        ]
+      }
+    }
+  };
 
-  function openDetail(key) {
-    const p = projects[key];
+  // ── Idioma actual (se recuerda entre visitas) ──
+  let lang = 'es';
+  try {
+    const saved = localStorage.getItem('lang');
+    if (saved === 'es' || saved === 'en') lang = saved;
+  } catch (e) { /* sin almacenamiento: se usa español */ }
+
+  const panel = document.getElementById('detailPanel');
+  const langBtn = document.getElementById('langToggle');
+  let currentProject = null;
+
+  const t = key => i18n[lang][key];
+
+  function renderDetail() {
+    const p = projects[currentProject];
     if (!p) return;
+    const c = p[lang];
 
     document.getElementById('detail-icon').textContent = p.icon;
-    document.getElementById('detail-title').textContent = p.title;
-    document.getElementById('detail-desc').textContent = p.desc;
+    document.getElementById('detail-title').textContent = c.title;
+    document.getElementById('detail-desc').textContent = c.desc;
     document.getElementById('detail-repo').href = p.repo;
 
     document.getElementById('detail-tags').innerHTML =
-      p.tags.map(t => `<span class="tag">${t}</span>`).join('');
+      p.tags.map(tag => `<span class="badge rounded-pill tag">${tag}</span>`).join('');
 
     document.getElementById('detail-features').innerHTML =
-      p.features.map(f => `<li>${f}</li>`).join('');
-
-    panel.classList.add('open');
-    overlay.classList.add('visible');
-    body.classList.add('detail-open');
+      c.features.map(f => `<li class="list-group-item">${f}</li>`).join('');
   }
 
-  function closeDetail() {
-    panel.classList.remove('open');
-    overlay.classList.remove('visible');
-    body.classList.remove('detail-open');
+  function applyLang() {
+    document.documentElement.lang = lang;
+    document.title = t('page_title');
+
+    document.querySelectorAll('[data-i18n]').forEach(el => { el.textContent = t(el.dataset.i18n); });
+    document.querySelectorAll('[data-i18n-aria]').forEach(el => { el.setAttribute('aria-label', t(el.dataset.i18nAria)); });
+
+    langBtn.textContent = t('toggle_label');
+    langBtn.setAttribute('aria-label', t('toggle_aria'));
+
+    renderDetail();   // si el panel está abierto, se traduce al instante
   }
 
-  document.querySelectorAll('.project-card').forEach(card => {
-    card.addEventListener('click', () => openDetail(card.dataset.project));
+  langBtn.addEventListener('click', () => {
+    lang = lang === 'es' ? 'en' : 'es';
+    try { localStorage.setItem('lang', lang); } catch (e) {}
+    applyLang();
   });
 
-  document.getElementById('detail-close').addEventListener('click', closeDetail);
-  overlay.addEventListener('click', closeDetail);
+  // Bootstrap dispara este evento al abrir el offcanvas; relatedTarget es la tarjeta que se tocó
+  panel.addEventListener('show.bs.offcanvas', event => {
+    const card = event.relatedTarget;
+    if (!card || !projects[card.dataset.project]) return;
 
-  document.addEventListener('keydown', e => {
-    if (e.key === 'Escape') closeDetail();
+    currentProject = card.dataset.project;
+    document.querySelectorAll('.project-card.selected').forEach(c => c.classList.remove('selected'));
+    card.classList.add('selected');
+    renderDetail();
   });
+
+  panel.addEventListener('hidden.bs.offcanvas', () => {
+    document.querySelectorAll('.project-card.selected').forEach(c => c.classList.remove('selected'));
+  });
+
+  applyLang();
 </script>
-
-
 </body>
 </html>
