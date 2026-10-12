@@ -83,13 +83,22 @@
       border-bottom: 1px solid var(--line);
       z-index: 90;
       --bs-nav-link-color: var(--bs-secondary-color);
-      --bs-nav-link-hover-color: var(--accent);
-      --bs-nav-underline-link-active-color: var(--accent);
+      --bs-nav-link-hover-color: #fff;
+      --bs-nav-underline-link-active-color: #fff;
       --bs-nav-underline-border-width: 2px;
       --bs-nav-underline-gap: 1.5rem;
     }
-    .site-nav .nav-link { padding-left: 0; padding-right: 0; }
-    .site-nav .nav-link.active { border-bottom-color: var(--accent); }
+    .site-nav .nav-link {
+      padding-left: 0; padding-right: 0;
+      border-bottom: 2px solid transparent;
+      transition: color .2s, border-color .2s;
+    }
+    .site-nav .nav-link:hover { color: #fff; }
+    .site-nav .nav-link.active {
+      color: #fff;
+      font-weight: 500;
+      border-bottom-color: var(--accent);
+    }
     #inicio, #proyectos { scroll-margin-top: 5rem; }
 
     /* ── HERO ── */
@@ -185,7 +194,7 @@
     }
   </style>
 </head>
-<body data-bs-spy="scroll" data-bs-target="#siteNav" data-bs-root-margin="-20% 0px -60% 0px" tabindex="0">
+<body>
 
 <!-- Panel de detalle del proyecto (Bootstrap Offcanvas) -->
 <div class="offcanvas offcanvas-end" tabindex="-1" id="detailPanel" aria-labelledby="detail-title">
@@ -565,6 +574,35 @@
   });
 
   applyLang();
+
+  // ── Enlace activo de la navegación (blanco + subrayado) ──
+  const navLinks = [...document.querySelectorAll('#siteNav .nav-link')];
+  const navSections = navLinks.map(a => document.querySelector(a.getAttribute('href')));
+
+  function setActive(index) {
+    navLinks.forEach((a, i) => {
+      a.classList.toggle('active', i === index);
+      if (i === index) a.setAttribute('aria-current', 'true');
+      else a.removeAttribute('aria-current');
+    });
+  }
+
+  function updateNav() {
+    let index = 0;
+    navSections.forEach((section, i) => {
+      if (section && section.getBoundingClientRect().top - 120 <= 0) index = i;
+    });
+    // Al llegar al final de la página, se marca la última sección
+    if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 4) {
+      index = navSections.length - 1;
+    }
+    setActive(index);
+  }
+
+  navLinks.forEach((a, i) => a.addEventListener('click', () => setActive(i)));
+  window.addEventListener('scroll', updateNav, { passive: true });
+  window.addEventListener('resize', updateNav);
+  updateNav();
 </script>
 </body>
 </html>
