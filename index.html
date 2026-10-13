@@ -300,6 +300,20 @@
           <div class="row row-cols-1 row-cols-md-2 row-cols-xl-3 g-4">
 
             <div class="col">
+              <button type="button" class="card project-card h-100" data-project="calculadora"
+                      data-bs-toggle="offcanvas" data-bs-target="#detailPanel" aria-controls="detailPanel">
+                <div class="card-body">
+                  <div class="project-icon mb-3">📐</div>
+                  <h3 class="card-title" data-i18n="card_calc_title">Calculadora de Coordenadas</h3>
+                  <p class="card-text small text-secondary" data-i18n="card_calc_desc">Cálculos matemáticos en sistemas de coordenadas 2D y 3D implementados en consola.</p>
+                </div>
+                <div class="card-footer bg-transparent border-0 pt-0 px-4 pb-4 d-flex flex-wrap gap-2">
+                  <span class="badge rounded-pill tag">Java</span>
+                </div>
+              </button>
+            </div>
+
+            <div class="col">
               <button type="button" class="card project-card h-100" data-project="sistema-escolar"
                       data-bs-toggle="offcanvas" data-bs-target="#detailPanel" aria-controls="detailPanel">
                 <div class="card-body">
@@ -311,20 +325,6 @@
                   <span class="badge rounded-pill tag">C#</span>
                   <span class="badge rounded-pill tag">SQL Server</span>
                   <span class="badge rounded-pill tag">Windows Forms</span>
-                </div>
-              </button>
-            </div>
-
-            <div class="col">
-              <button type="button" class="card project-card h-100" data-project="calculadora"
-                      data-bs-toggle="offcanvas" data-bs-target="#detailPanel" aria-controls="detailPanel">
-                <div class="card-body">
-                  <div class="project-icon mb-3">📐</div>
-                  <h3 class="card-title" data-i18n="card_calc_title">Calculadora de Coordenadas</h3>
-                  <p class="card-text small text-secondary" data-i18n="card_calc_desc">Cálculos matemáticos en sistemas de coordenadas 2D y 3D implementados en consola.</p>
-                </div>
-                <div class="card-footer bg-transparent border-0 pt-0 px-4 pb-4 d-flex flex-wrap gap-2">
-                  <span class="badge rounded-pill tag">Java</span>
                 </div>
               </button>
             </div>
@@ -426,6 +426,31 @@
 
   // ── Detalle de cada proyecto en cada idioma ──
   const projects = {
+    'calculadora': {
+      icon: '📐',
+      tags: ['Java'],
+      repo: 'https://github.com/damianenriquez680/calculadora_coordenadas',
+      es: {
+        title: 'Calculadora de Sistemas de Coordenadas',
+        desc: 'Aplicación de consola que realiza conversiones entre sistemas de coordenadas y calcula distancias entre puntos, tanto en dos como en tres dimensiones.',
+        features: [
+          'Conversión 2D: rectangulares ↔ polares',
+          'Conversión 3D: rectangulares, cilíndricas y esféricas entre sí',
+          'Cálculo de distancia entre puntos en cualquier combinación de sistemas',
+          'Código organizado en clases por tipo de coordenada'
+        ]
+      },
+      en: {
+        title: 'Coordinate Systems Calculator',
+        desc: 'Console application that converts between coordinate systems and calculates distances between points, in both two and three dimensions.',
+        features: [
+          '2D conversion: rectangular ↔ polar',
+          '3D conversion: rectangular, cylindrical and spherical, in any direction',
+          'Distance between points in any combination of systems',
+          'Code organized into classes by coordinate type'
+        ]
+      }
+    },
     'sistema-escolar': {
       icon: '🗃️',
       tags: ['C#', 'SQL Server', 'Windows Forms'],
@@ -450,31 +475,6 @@
           'Re-enrollment records with grades',
           'Windows Forms interface with centralized navigation',
           'Team project — Systems Development 3'
-        ]
-      }
-    },
-    'calculadora': {
-      icon: '📐',
-      tags: ['Java'],
-      repo: 'https://github.com/damianenriquez680/calculadora_coordenadas',
-      es: {
-        title: 'Calculadora de Sistemas de Coordenadas',
-        desc: 'Aplicación de consola que realiza conversiones entre sistemas de coordenadas y calcula distancias entre puntos, tanto en dos como en tres dimensiones.',
-        features: [
-          'Conversión 2D: rectangulares ↔ polares',
-          'Conversión 3D: rectangulares, cilíndricas y esféricas entre sí',
-          'Cálculo de distancia entre puntos en cualquier combinación de sistemas',
-          'Código organizado en clases por tipo de coordenada'
-        ]
-      },
-      en: {
-        title: 'Coordinate Systems Calculator',
-        desc: 'Console application that converts between coordinate systems and calculates distances between points, in both two and three dimensions.',
-        features: [
-          '2D conversion: rectangular ↔ polar',
-          '3D conversion: rectangular, cylindrical and spherical, in any direction',
-          'Distance between points in any combination of systems',
-          'Code organized into classes by coordinate type'
         ]
       }
     },
