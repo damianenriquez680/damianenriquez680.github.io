@@ -301,6 +301,7 @@
 
       <hr class="my-4"/>
 
+      <!-- Formación -->
       <div class="sidebar-label mb-2" data-i18n="label_education">Formación</div>
       <div class="small lh-lg">
         <div class="fw-medium" data-i18n="edu_degree">Ing. en Sistemas de Información</div>
@@ -310,19 +311,38 @@
 
       <hr class="my-4"/>
 
+      <!-- Tecnologías -->
       <div class="sidebar-label mb-2" data-i18n="label_tech">Tecnologías</div>
-      <div class="d-flex flex-wrap gap-2">
-        <span class="badge rounded-pill tag">C#</span>
-        <span class="badge rounded-pill tag">Java</span>
+
+      <div class="small text-secondary mb-2" data-i18n="tech_front">Frontend</div>
+      <div class="d-flex flex-wrap gap-2 mb-3">
+        <span class="badge rounded-pill tag">HTML</span>
+        <span class="badge rounded-pill tag">CSS</span>
+        <span class="badge rounded-pill tag">JavaScript</span>
+        <span class="badge rounded-pill tag">Bootstrap</span>
+        <span class="badge rounded-pill tag">Tailwind CSS</span>
+      </div>
+
+      <div class="small text-secondary mb-2" data-i18n="tech_back">Backend</div>
+      <div class="d-flex flex-wrap gap-2 mb-3">
         <span class="badge rounded-pill tag">Python</span>
         <span class="badge rounded-pill tag">Flask</span>
+        <span class="badge rounded-pill tag">C#</span>
+        <span class="badge rounded-pill tag">Java</span>
         <span class="badge rounded-pill tag">SQL Server</span>
         <span class="badge rounded-pill tag">SQLite</span>
+      </div>
+
+      <div class="small text-secondary mb-2" data-i18n="tech_tools">Herramientas</div>
+      <div class="d-flex flex-wrap gap-2">
         <span class="badge rounded-pill tag">Visual Studio</span>
+        <span class="badge rounded-pill tag">VS Code</span>
+        <span class="badge rounded-pill tag">Postman</span>
       </div>
 
       <hr class="my-4"/>
 
+      <!-- Idiomas -->
       <div class="sidebar-label mb-2" data-i18n="label_languages">Idiomas</div>
       <div class="small lh-lg">
         <div data-i18n="lang_es">Español — Nativo</div>
@@ -399,6 +419,33 @@
               </button>
             </div>
 
+            <!-- Generador de Datos Estudiantiles -->
+            <div class="col">
+              <button type="button" class="card project-card h-100" data-project="generador-alumnos"
+                      data-bs-toggle="offcanvas" data-bs-target="#detailPanel" aria-controls="detailPanel">
+                <div class="card-body">
+                  <div class="project-icon mb-3">🎓</div>
+                  <h3 class="card-title" data-i18n="card_generador_title">Generador de Datos Estudiantiles</h3>
+                  <p class="card-text small text-secondary" data-i18n="card_generador_desc">Herramienta web que genera hasta 50,000 registros ficticios de alumnos en SQL, CSV y JSON para poblar y probar bases de datos.</p>
+                </div>
+                <div class="card-footer bg-transparent border-0 pt-0 px-4 pb-4 d-flex flex-wrap gap-2">
+                  <span class="badge rounded-pill tag">HTML</span>
+                  <span class="badge rounded-pill tag">JavaScript</span>
+                  <span class="badge rounded-pill tag">Tailwind CSS</span>
+                  <span class="badge rounded-pill tag">SQL</span>
+                </div>
+              </button>
+            </div>
+
+          </div>
+
+          <!-- Segunda fila de tres proyectos -->
+          <div class="row row-cols-1 row-cols-md-2 row-cols-xl-3 g-4 mt-0"> 
+            <!-- 
+            Notas para después:
+            >> mt-0 es el espacio entre una fila de proyectos y otra
+            -->
+
             <!-- BiblioTeca Flask -->
             <div class="col">
               <button type="button" class="card project-card h-100" data-project="biblioteca"
@@ -413,18 +460,10 @@
                   <span class="badge rounded-pill tag">SQLite</span>
                   <span class="badge rounded-pill tag">Python</span>
                   <span class="badge rounded-pill tag">HTML</span>
+                  <span class="badge rounded-pill tag">CSS</span>
                 </div>
               </button>
             </div>
-
-          </div>
-
-          <!-- Segunda fila de tres proyectos -->
-          <div class="row row-cols-1 row-cols-md-2 row-cols-xl-3 g-4 mt-0"> 
-            <!-- 
-            Notas para después:
-            >> mt-0 es el espacio entre una fila de proyectos y otra
-            -->
 
             <!-- Generador de facturas y presupuestos -->
             <div class="col">
@@ -503,6 +542,9 @@
       edu_school: 'Universidad de Sonora',
       edu_status: 'En curso',
       label_tech: 'Tecnologías',
+      tech_front: 'Frontend',
+      tech_back: 'Backend',
+      tech_tools: 'Herramientas',
       label_languages: 'Idiomas',
       lang_es: 'Español — Nativo',
       lang_en: 'Inglés — B1',
@@ -546,7 +588,9 @@
       blog_btn_drive: 'Ver proyecto en Google Drive',
       status_wip: 'En curso',
       card_facturas_title: 'Generador de Facturas',
-      card_facturas_desc: 'API REST con Flask y SQLite para gestionar clientes, productos y facturas. Generación de PDF e interfaz web en desarrollo.'
+      card_facturas_desc: 'API REST con Flask y SQLite para gestionar clientes, productos y facturas. Generación de PDF e interfaz web en desarrollo.',
+      card_generador_title: 'Generador de Datos Estudiantiles',
+      card_generador_desc: 'Herramienta web que genera hasta 50,000 registros ficticios de alumnos en SQL, CSV y JSON para poblar y probar bases de datos.'
     },
     en: {
       page_title: 'Damian Enriquez — Portfolio',
@@ -564,6 +608,9 @@
       edu_school: 'University of Sonora',
       edu_status: 'In progress',
       label_tech: 'Technologies',
+      tech_front: 'Frontend',
+      tech_back: 'Backend',
+      tech_tools: 'Tools',
       label_languages: 'Languages',
       lang_es: 'Spanish — Native',
       lang_en: 'English — B1',
@@ -607,7 +654,9 @@
       blog_btn_drive: 'View project on Google Drive',
       status_wip: 'In progress',
       card_facturas_title: 'Invoice Generator',
-      card_facturas_desc: 'REST API with Flask and SQLite to manage customers, products and invoices. PDF generation and web interface in development.'
+      card_facturas_desc: 'REST API with Flask and SQLite to manage customers, products and invoices. PDF generation and web interface in development.',
+      card_generador_title: 'Student Data Generator',
+      card_generador_desc: 'Web tool that generates up to 50,000 fake student records in SQL, CSV and JSON to populate and test databases.'
     }
   };
 
@@ -665,9 +714,67 @@
         ]
       }
     },
+    'generador-alumnos': {
+      icon: '🎓',
+      tags: ['HTML', 'JavaScript', 'Tailwind CSS', 'SQL'],
+      repo: 'https://github.com/damianenriquez680/generador_alumnos',
+      es: {
+        title: 'Generador de Datos Estudiantiles',
+        desc: 'Herramienta web que genera hasta 50,000 registros ficticios de alumnos en SQL, CSV y JSON para poblar y probar bases de datos.',
+        features: [
+          'Formatos de salida: SQL (MySQL/MariaDB), CSV y JSON, con descarga de archivo',
+          'Datos ficticios: apellidos mexicanos y rusos, nombres mexicanos y franceses',
+          'Matrículas consecutivas y correo institucional',
+          'Entre 1 y 50,000 registros por generación',
+          'Proyecto individual — Base de Datos 2, Universidad de Sonora (marzo de 2026)',
+          'Realizado con el apoyo del profesor Jose Humberto Abril Garcia'
+        ]
+      },
+      en: {
+        title: 'Student Data Generator',
+        desc: 'Web tool that generates up to 50,000 fake student records in SQL, CSV and JSON to populate and test databases.',
+        features: [
+          'Output formats: SQL (MySQL/MariaDB), CSV and JSON, with file download',
+          'Fake data: Mexican and Russian last names, Mexican and French first names',
+          'Sequential student IDs and institutional email',
+          'Between 1 and 50,000 records per run',
+          'Individual project — Database 2, University of Sonora (March 2026)',
+          'Built with the support of Professor Jose Humberto Abril Garcia'
+        ]
+      }
+    },
+    'generador-alumnos': {
+      icon: '🎓',
+      tags: ['HTML', 'JavaScript', 'Tailwind CSS', 'SQL'],
+      repo: 'https://github.com/damianenriquez680/generador_alumnos',
+      es: {
+        title: 'Generador de Datos Estudiantiles',
+        desc: 'Herramienta web que genera hasta 50,000 registros ficticios de alumnos en SQL, CSV y JSON para poblar y probar bases de datos.',
+        features: [
+          'Formatos de salida: SQL (MySQL/MariaDB), CSV y JSON, con descarga de archivo',
+          'Datos ficticios: apellidos mexicanos y rusos, nombres mexicanos y franceses',
+          'Matrículas consecutivas y correo institucional',
+          'Entre 1 y 50,000 registros por generación',
+          'Proyecto individual — Base de Datos 2, Universidad de Sonora (marzo de 2026)',
+          'Realizado con el apoyo del profesor Jose Humberto Abril Garcia'
+        ]
+      },
+      en: {
+        title: 'Student Data Generator',
+        desc: 'Web tool that generates up to 50,000 fake student records in SQL, CSV and JSON to populate and test databases.',
+        features: [
+          'Output formats: SQL (MySQL/MariaDB), CSV and JSON, with file download',
+          'Fake data: Mexican and Russian last names, Mexican and French first names',
+          'Sequential student IDs and institutional email',
+          'Between 1 and 50,000 records per run',
+          'Individual project — Database 2, University of Sonora (March 2026)',
+          'Built with the support of Professor Jose Humberto Abril Garcia'
+        ]
+      }
+    },
     'biblioteca': {
       icon: '📚',
-      tags: ['Flask', 'SQLite', 'Python', 'HTML'],
+      tags: ['Flask', 'SQLite', 'Python', 'HTML', 'CSS'],
       repo: 'https://github.com/damianenriquez680/biblioteca_flask',
       es: {
         title: 'BiblioTeca — Sistema de Gestión de Biblioteca',

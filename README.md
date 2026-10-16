@@ -24,11 +24,10 @@ Estudiante de **Ingeniería en Sistemas de Información** en la Universidad de S
 
 ## 🛠️ Tecnologías
 
-- **Lenguajes:** C#, Java, Python
-- **Frameworks:** Flask
+- **Frontend:** HTML, CSS, JavaScript, Bootstrap 5, Tailwind CSS
+- **Backend:** Python, Flask, C#, Java
 - **Bases de datos:** SQL Server, SQLite
-- **Herramientas:** Visual Studio
-- **Sitio web:** HTML, CSS, JavaScript, Bootstrap 5
+- **Herramientas:** Visual Studio, VS Code, Postman
 
 ---
 
@@ -38,7 +37,8 @@ Estudiante de **Ingeniería en Sistemas de Información** en la Universidad de S
 |----------|------------|-------------|
 | Sistema Escolar con Base de Datos | C#, SQL Server, Windows Forms | [Ver repo](https://github.com/damianenriquez680/DS3_SistemaEscolarBD) |
 | Calculadora de Coordenadas | Java | [Ver repo](https://github.com/damianenriquez680/CalculadoraCoordenadas) |
-| BiblioTeca | Flask, SQLite, Python, HTML | [Ver repo](https://github.com/damianenriquez680/biblioteca_flask) |
+| Generador de Datos Estudiantiles | HTML, JavaScript, Tailwind CSS, SQL | [Ver repo](https://github.com/damianenriquez680/generador_alumnos) |
+| BiblioTeca | Flask, SQLite, Python, HTML, CSS | [Ver repo](https://github.com/damianenriquez680/biblioteca_flask) |
 | Generador de Facturas *(en curso)* | Flask, SQLite, Python | [Ver repo](https://github.com/damianenriquez680/generador_facturas) |
 
 ---
