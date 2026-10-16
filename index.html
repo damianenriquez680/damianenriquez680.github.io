@@ -208,6 +208,12 @@
       position: absolute; left: 0;
       color: var(--accent);
     }
+    .status-badge {
+      background: rgba(200,169,110,0.12);
+      color: var(--accent);
+      border: 1px solid var(--accent-soft);
+      font-weight: 500;
+    }
   </style>
 </head>
 <body>
@@ -222,6 +228,7 @@
 
     <!-- Vista de proyecto (descripción + funcionalidades) -->
     <div id="detail-project">
+      <span id="detail-status" class="badge rounded-pill status-badge mb-2 d-none" data-i18n="status_wip">En curso</span>
       <h2 class="h4 mb-3" id="detail-title"></h2>
       <div class="d-flex flex-wrap gap-2 mb-4" id="detail-tags"></div>
 
@@ -357,8 +364,10 @@
         <section id="proyectos">
           <h2 class="h5 text-accent mb-4" data-i18n="projects_title">Proyectos</h2>
 
+          <!-- Primera fila de proyectos -->
           <div class="row row-cols-1 row-cols-md-2 row-cols-xl-3 g-4">
 
+            <!-- Calculadora de coordenadas -->
             <div class="col">
               <button type="button" class="card project-card h-100" data-project="calculadora"
                       data-bs-toggle="offcanvas" data-bs-target="#detailPanel" aria-controls="detailPanel">
@@ -373,6 +382,7 @@
               </button>
             </div>
 
+            <!-- Sistema escolar -->
             <div class="col">
               <button type="button" class="card project-card h-100" data-project="sistema-escolar"
                       data-bs-toggle="offcanvas" data-bs-target="#detailPanel" aria-controls="detailPanel">
@@ -389,6 +399,7 @@
               </button>
             </div>
 
+            <!-- BiblioTeca Flask -->
             <div class="col">
               <button type="button" class="card project-card h-100" data-project="biblioteca"
                       data-bs-toggle="offcanvas" data-bs-target="#detailPanel" aria-controls="detailPanel">
@@ -407,6 +418,36 @@
             </div>
 
           </div>
+
+          <!-- Segunda fila de tres proyectos -->
+          <div class="row row-cols-1 row-cols-md-2 row-cols-xl-3 g-4 mt-0"> 
+            <!-- 
+            Notas para después:
+            >> mt-0 es el espacio entre una fila de proyectos y otra
+            -->
+
+            <!-- Generador de facturas y presupuestos -->
+            <div class="col">
+              <button type="button" class="card project-card h-100" data-project="facturas"
+                      data-bs-toggle="offcanvas" data-bs-target="#detailPanel" aria-controls="detailPanel">
+                <div class="card-body">
+                  <div class="d-flex justify-content-between align-items-start mb-3">
+                    <div class="project-icon">🧾</div>
+                    <span class="badge rounded-pill status-badge" data-i18n="status_wip">En curso</span>
+                  </div>
+                  <h3 class="card-title" data-i18n="card_facturas_title">Generador de Facturas</h3>
+                  <p class="card-text small text-secondary" data-i18n="card_facturas_desc">API REST con Flask y SQLite para gestionar clientes, productos y facturas. Generación de PDF e interfaz web en desarrollo.</p>
+                </div>
+                <div class="card-footer bg-transparent border-0 pt-0 px-4 pb-4 d-flex flex-wrap gap-2">
+                  <span class="badge rounded-pill tag">Flask</span>
+                  <span class="badge rounded-pill tag">SQLite</span>
+                  <span class="badge rounded-pill tag">Python</span>
+                </div>
+              </button>
+            </div>
+
+          </div>
+
         </section>
 
         <section id="blog" class="mt-5 pt-5 border-top">
@@ -414,6 +455,7 @@
 
           <div class="row g-4">
 
+            <!-- Conectividad a Internet Blog -->
             <div class="col">
               <button type="button" class="card project-card h-100" data-project="blog"
                       data-bs-toggle="offcanvas" data-bs-target="#detailPanel" aria-controls="detailPanel">
@@ -501,7 +543,10 @@
       blog_p_learned: 'Este análisis me enseñó que un resultado estadísticamente significativo no siempre es un efecto grande: con un R² de 10.83%, aprendí a distinguir significancia de relevancia práctica, a reconocer los límites de la correlación de Pearson cuando hay valores atípicos y a no confundir correlación con causalidad. También practiqué el ciclo completo de un proyecto de datos, desde diseñar la encuesta y organizar la base hasta interpretar y comunicar los resultados.',
       blog_h_team: 'Equipo',
       blog_course: 'Materia: Análisis de Datos · Maestra: Lucía Guadalupe Estrada Lara',
-      blog_btn_drive: 'Ver proyecto en Google Drive'
+      blog_btn_drive: 'Ver proyecto en Google Drive',
+      status_wip: 'En curso',
+      card_facturas_title: 'Generador de Facturas',
+      card_facturas_desc: 'API REST con Flask y SQLite para gestionar clientes, productos y facturas. Generación de PDF e interfaz web en desarrollo.'
     },
     en: {
       page_title: 'Damian Enriquez — Portfolio',
@@ -559,7 +604,10 @@
       blog_p_learned: 'This analysis taught me that a statistically significant result is not always a large effect: with an R² of 10.83%, I learned to tell significance apart from practical relevance, to recognize the limits of Pearson correlation in the presence of outliers, and not to confuse correlation with causation. I also practiced the full cycle of a data project, from designing the survey and organizing the dataset to interpreting and communicating the results.',
       blog_h_team: 'Team',
       blog_course: 'Course: Data Analysis · Instructor: Lucía Guadalupe Estrada Lara',
-      blog_btn_drive: 'View project on Google Drive'
+      blog_btn_drive: 'View project on Google Drive',
+      status_wip: 'In progress',
+      card_facturas_title: 'Invoice Generator',
+      card_facturas_desc: 'REST API with Flask and SQLite to manage customers, products and invoices. PDF generation and web interface in development.'
     }
   };
 
@@ -646,6 +694,36 @@
         ]
       }
     },
+    'facturas': {
+      icon: '🧾',
+      wip: true,
+      tags: ['Flask', 'SQLite', 'Python'],
+      repo: 'https://github.com/damianenriquez680/generador_facturas',
+      es: {
+        title: 'Generador de Facturas',
+        desc: 'Sistema para generar facturas y presupuestos, con una API REST en Flask y base de datos SQLite. Proyecto en curso: faltan la generación de PDF y la interfaz web.',
+        features: [
+          'API REST completa para clientes, productos y facturas (GET, POST, PUT y DELETE)',
+          'Al consultar una factura por id, incluye su detalle con los productos',
+          'Fecha de emisión y estatus asignados automáticamente por la base de datos',
+          'Base de datos SQLite con 4 tablas: clientes, productos, facturas y detalle',
+          'Probada con Postman',
+          'En desarrollo: generación de PDF con WeasyPrint e interfaz en HTML, CSS y JavaScript'
+        ]
+      },
+      en: {
+        title: 'Invoice Generator',
+        desc: 'System to generate invoices and quotes, with a REST API in Flask and a SQLite database. Work in progress: PDF generation and the web interface are still missing.',
+        features: [
+          'Complete REST API for customers, products and invoices (GET, POST, PUT and DELETE)',
+          'Fetching an invoice by id includes its detail with the products',
+          'Issue date and status assigned automatically by the database',
+          'SQLite database with 4 tables: customers, products, invoices and invoice detail',
+          'Tested with Postman',
+          'In development: PDF generation with WeasyPrint and an HTML, CSS and JavaScript interface'
+        ]
+      }
+    },
     'blog': {
       layout: 'blog',
       icon: '📊',
@@ -673,6 +751,7 @@
     const isBlog = p.layout === 'blog';
     const c = p[lang] || {};
 
+    document.getElementById('detail-status').classList.toggle('d-none', !p.wip);
     document.getElementById('detail-icon').textContent = p.icon;
 
     // Alterna entre la vista de proyecto y la vista de artículo
