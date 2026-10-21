@@ -22,6 +22,22 @@ Estudiante de **Ingeniería en Sistemas de Información** en la Universidad de S
 
 ---
 
+## Estructura
+
+```
+├── index.html          # Estructura de la página
+├── cv.pdf              # Currículum
+├── css/
+│   └── styles.css      # Estilos personalizados sobre Bootstrap
+├── scripts/
+│   ├── i18n.js         # Textos de la interfaz en español e inglés
+│   ├── projects.js     # Datos de cada proyecto (panel de detalle)
+│   └── script.js       # Lógica: idioma, panel de proyectos y navegación
+└── README.md
+```
+
+---
+
 ## 🛠️ Tecnologías
 
 - **Frontend:** HTML, CSS, JavaScript, Bootstrap 5, Tailwind CSS

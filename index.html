@@ -9,212 +9,8 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
   <!-- Fuentes -->
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
-
-  <style>
-    /* ── TEMA: se sobreescriben las variables de Bootstrap ── */
-    [data-bs-theme="dark"] {
-      --navy: #0f1923;
-      --navy2: #1a2736;
-      --accent: #c8a96e;
-      --accent-soft: rgba(200,169,110,0.35);
-      --line: rgba(200,169,110,0.2);
-
-      --bs-body-bg: var(--navy);
-      --bs-body-color: #e8e2d9;
-      --bs-secondary-color: #8a9bb0;
-      --bs-body-font-family: 'DM Sans', system-ui, sans-serif;
-      --bs-border-color: var(--line);
-      --bs-link-color: var(--accent);
-      --bs-link-hover-color: #dcc189;
-    }
-
-    html { scroll-behavior: smooth; }
-    h1, h2, h3, h4, h5, .font-display { font-family: 'Playfair Display', Georgia, serif; font-weight: 400; }
-    .text-accent { color: var(--accent) !important; }
-
-    * { scrollbar-width: thin; scrollbar-color: var(--accent) var(--navy2); }
-
-    /* ── SIDEBAR ── */
-    .sidebar {
-      background: var(--navy2);
-      border-bottom: 1px solid var(--line);
-    }
-    @media (min-width: 992px) {
-      .sidebar {
-        position: sticky; top: 0;
-        height: 100vh; overflow-y: auto;
-        border-bottom: 0;
-        border-right: 1px solid var(--line);
-      }
-    }
-
-    .avatar {
-      width: 72px; height: 72px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, var(--accent), #8b6e3a);
-      color: var(--navy);
-      font-family: 'Playfair Display', serif;
-      font-size: 28px;
-    }
-
-    .sidebar-label {
-      font-size: .7rem;
-      letter-spacing: .15em;
-      text-transform: uppercase;
-      color: var(--bs-secondary-color);
-    }
-    .sidebar hr { border-color: var(--line); opacity: 1; }
-    .sidebar a { text-decoration: none; }
-    .sidebar a:hover { text-decoration: underline; }
-
-    /* ── ETIQUETAS (badges) ── */
-    .tag {
-      background: transparent;
-      color: var(--accent);
-      border: 1px solid var(--accent-soft);
-      font-weight: 400;
-      padding: .4em .85em;
-    }
-
-    /* ── NAV SUPERIOR ── */
-    .site-nav {
-      background: rgba(15,25,35,0.88);
-      backdrop-filter: blur(8px);
-      border-bottom: 1px solid var(--line);
-      z-index: 90;
-      --bs-nav-link-color: var(--bs-secondary-color);
-      --bs-nav-link-hover-color: #fff;
-      --bs-nav-underline-link-active-color: #fff;
-      --bs-nav-underline-border-width: 2px;
-      --bs-nav-underline-gap: 1.5rem;
-    }
-    .site-nav .nav-link {
-      padding-left: 0; padding-right: 0;
-      border-bottom: 2px solid transparent;
-      transition: color .2s, border-color .2s;
-    }
-    .site-nav .nav-link:hover { color: #fff; }
-    .site-nav .nav-link.active {
-      color: #fff;
-      font-weight: 500;
-      border-bottom-color: var(--accent);
-    }
-    #inicio, #proyectos, #blog { scroll-margin-top: 5rem; }
-
-    /* ── HERO ── */
-    .hero-name {
-      font-size: clamp(2.5rem, 7vw, 4.5rem);
-      line-height: 1.05;
-    }
-    .hero-desc { max-width: 38rem; line-height: 1.75; }
-
-    @media (prefers-reduced-motion: no-preference) {
-      .hero { animation: fadeUp .7s ease both; }
-    }
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(18px); }
-      to   { opacity: 1; transform: none; }
-    }
-
-    /* ── BOTONES ── */
-    .btn-accent {
-      --bs-btn-color: var(--navy);
-      --bs-btn-bg: var(--accent);
-      --bs-btn-border-color: var(--accent);
-      --bs-btn-hover-color: var(--navy);
-      --bs-btn-hover-bg: #dcc189;
-      --bs-btn-hover-border-color: #dcc189;
-      --bs-btn-active-color: var(--navy);
-      --bs-btn-active-bg: #b8995f;
-      --bs-btn-active-border-color: #b8995f;
-      font-weight: 500;
-    }
-    .btn-outline-accent {
-      --bs-btn-color: var(--accent);
-      --bs-btn-border-color: var(--accent-soft);
-      --bs-btn-hover-color: var(--navy);
-      --bs-btn-hover-bg: var(--accent);
-      --bs-btn-hover-border-color: var(--accent);
-      --bs-btn-active-color: var(--navy);
-      --bs-btn-active-bg: var(--accent);
-    }
-
-    /* ── TARJETAS DE PROYECTO ── */
-    #proyectos { scroll-margin-top: 2rem; }
-
-    .project-card {
-      --bs-card-bg: var(--navy2);
-      --bs-card-border-color: rgba(200,169,110,0.15);
-      --bs-card-border-radius: .75rem;
-      --bs-card-spacer-y: 1.5rem;
-      --bs-card-spacer-x: 1.5rem;
-      text-align: left;
-      color: inherit;
-      font: inherit;
-      width: 100%;
-      transition: border-color .25s, transform .25s, box-shadow .25s;
-    }
-    .project-card:hover,
-    .project-card:focus-visible,
-    .project-card.selected {
-      border-color: var(--accent);
-      box-shadow: 0 0 0 1px rgba(200,169,110,.35),
-                  0 0 22px rgba(200,169,110,.28);
-    }
-    .project-card:hover { transform: translateY(-3px); }
-    .project-card:focus-visible { outline: none; }
-    .project-card.selected { background: #1f2f42; }
-    .project-icon { font-size: 1.6rem; }
-    .project-card .card-title { font-family: 'Playfair Display', serif; font-size: 1.1rem; }
-
-    /* ── BLOG ── */
-    .blog-post {
-      --bs-card-bg: var(--navy2);
-      --bs-card-border-color: rgba(200,169,110,0.15);
-      --bs-card-border-radius: .75rem;
-      --bs-card-spacer-y: 2rem;
-      --bs-card-spacer-x: 2rem;
-    }
-    .blog-post-title { font-family: 'Playfair Display', serif; font-size: clamp(1.4rem, 3vw, 1.85rem); line-height: 1.3; }
-    .blog-h { font-family: 'Playfair Display', serif; font-size: 1.15rem; margin: 2rem 0 .75rem; }
-    .blog-post p, .blog-highlights { line-height: 1.75; max-width: none; }
-    .blog-highlights { padding-left: 1.2rem; }
-    .blog-highlights li { margin-bottom: .4rem; }
-
-    /* ── PANEL DE DETALLE (Offcanvas) ── */
-    #detailPanel {
-      --bs-offcanvas-width: 420px;
-      --bs-offcanvas-bg: var(--navy2);
-      --bs-offcanvas-border-color: var(--line);
-    }
-    #detailPanel.panel-wide { --bs-offcanvas-width: 1040px; }
-    #detailPanel.panel-wide .offcanvas-body { padding: 1rem !important; }
-    .detail-label {
-      font-size: .7rem;
-      letter-spacing: .15em;
-      text-transform: uppercase;
-      color: var(--accent);
-    }
-    .detail-features .list-group-item {
-      background: transparent;
-      border-color: rgba(200,169,110,.12);
-      color: #e8e2d9;
-      font-size: .9rem;
-      padding-left: 1.4rem;
-      position: relative;
-    }
-    .detail-features .list-group-item::before {
-      content: "—";
-      position: absolute; left: 0;
-      color: var(--accent);
-    }
-    .status-badge {
-      background: rgba(200,169,110,0.12);
-      color: var(--accent);
-      border: 1px solid var(--accent-soft);
-      font-weight: 500;
-    }
-  </style>
+  <!-- Styles -->
+  <link href="styles/styles.css" rel="stylesheet"/>
 </head>
 <body>
 
@@ -241,41 +37,41 @@
 
     <!-- Vista de blog (artículo completo; los textos salen de las claves blog_* y hl_* de i18n) -->
     <div id="detail-blog" class="blog-post" hidden>
-              <h3 class="blog-post-title mb-2" id="blog-post-title" data-i18n="blog_post_title">Conectividad a Internet y Rendimiento Académico: Un Análisis Estadístico en Ingeniería en Sistemas</h3>
-              <p class="small text-secondary mb-3" data-i18n="blog_meta">Proyecto final de Análisis de Datos · Universidad de Sonora · Semestre 2026-1</p>
-              <div class="d-flex flex-wrap gap-2 mb-4" id="detail-blog-tags"></div>
+      <h3 class="blog-post-title mb-2" id="blog-post-title" data-i18n="blog_post_title">Conectividad a Internet y Rendimiento Académico: Un Análisis Estadístico en Ingeniería en Sistemas</h3>
+      <p class="small text-secondary mb-3" data-i18n="blog_meta">Proyecto final de Análisis de Datos · Universidad de Sonora · Semestre 2026-1</p>
+      <div class="d-flex flex-wrap gap-2 mb-4" id="detail-blog-tags"></div>
 
-              <h4 class="blog-h" data-i18n="blog_h_intro">Introducción y contexto</h4>
-              <p data-i18n="blog_p_intro">En la educación moderna, el acceso a internet es una herramienta indispensable, y más aún en Ingeniería en Sistemas de Información: clonar repositorios, descargar dependencias, usar plataformas en la nube o entregar tareas depende de una conexión estable. Con esa idea realizamos un estudio cuantitativo, no experimental, con una muestra de 210 estudiantes de la Universidad de Sonora (campus Hermosillo) para responder una pregunta concreta: ¿cómo impacta la velocidad de conexión (Mbps) en la frecuencia de retrasos en la entrega de actividades académicas?</p>
+      <h4 class="blog-h" data-i18n="blog_h_intro">Introducción y contexto</h4>
+      <p data-i18n="blog_p_intro">En la educación moderna, el acceso a internet es una herramienta indispensable, y más aún en Ingeniería en Sistemas de Información: clonar repositorios, descargar dependencias, usar plataformas en la nube o entregar tareas depende de una conexión estable. Con esa idea realizamos un estudio cuantitativo, no experimental, con una muestra de 210 estudiantes de la Universidad de Sonora (campus Hermosillo) para responder una pregunta concreta: ¿cómo impacta la velocidad de conexión (Mbps) en la frecuencia de retrasos en la entrega de actividades académicas?</p>
 
-              <h4 class="blog-h" data-i18n="blog_h_method">Metodología y análisis estadístico</h4>
-              <p data-i18n="blog_p_method1">Recolectamos los datos con una encuesta de 15 preguntas en Google Forms, los organizamos en Excel y los procesamos con Python (SciPy y Pandas). Con ellos hicimos un análisis descriptivo, una prueba de hipótesis y un modelo de regresión lineal simple, con un nivel de significancia de α = 0.05.</p>
-              <p data-i18n="blog_p_method2">La prueba arrojó un coeficiente de correlación de Pearson de r = −0.3292 con un valor p &lt; 0.001 (reportado como 0.0000). Como p &lt; 0.05, rechazamos la hipótesis nula con un 95% de confianza: existe una relación significativa entre la velocidad de internet y los retrasos. El signo negativo indica que, a mayor velocidad, menor es el nivel de retraso reportado.</p>
+      <h4 class="blog-h" data-i18n="blog_h_method">Metodología y análisis estadístico</h4>
+      <p data-i18n="blog_p_method1">Recolectamos los datos con una encuesta de 15 preguntas en Google Forms, los organizamos en Excel y los procesamos con Python (SciPy y Pandas). Con ellos hicimos un análisis descriptivo, una prueba de hipótesis y un modelo de regresión lineal simple, con un nivel de significancia de α = 0.05.</p>
+      <p data-i18n="blog_p_method2">La prueba arrojó un coeficiente de correlación de Pearson de r = −0.3292 con un valor p &lt; 0.001 (reportado como 0.0000). Como p &lt; 0.05, rechazamos la hipótesis nula con un 95% de confianza: existe una relación significativa entre la velocidad de internet y los retrasos. El signo negativo indica que, a mayor velocidad, menor es el nivel de retraso reportado.</p>
 
-              <h4 class="blog-h" data-i18n="blog_h_results">Resultados e interpretación</h4>
-              <p data-i18n="blog_p_results1">El modelo de regresión obtenido fue ŷ = 2.45 − 0.003x, con un R² = 10.83%. En la práctica, la velocidad funciona como un facilitador: una mejor conexión se asocia con menos retrasos y menos tiempo perdido por fallas, pero explica solo una parte del fenómeno. El cumplimiento final depende en mayor medida de otros factores, como la gestión personal del tiempo y la complejidad de las entregas.</p>
-              <p data-i18n="blog_p_results2">También observamos que lo más común es compartir la red doméstica con 5 o más dispositivos, lo que identificamos como un riesgo latente de saturación e inestabilidad, sobre todo en horarios de alta demanda. Además, el 27% de la muestra sí percibe que su internet afecta su rendimiento académico.</p>
+      <h4 class="blog-h" data-i18n="blog_h_results">Resultados e interpretación</h4>
+      <p data-i18n="blog_p_results1">El modelo de regresión obtenido fue ŷ = 2.45 − 0.003x, con un R² = 10.83%. En la práctica, la velocidad funciona como un facilitador: una mejor conexión se asocia con menos retrasos y menos tiempo perdido por fallas, pero explica solo una parte del fenómeno. El cumplimiento final depende en mayor medida de otros factores, como la gestión personal del tiempo y la complejidad de las entregas.</p>
+      <p data-i18n="blog_p_results2">También observamos que lo más común es compartir la red doméstica con 5 o más dispositivos, lo que identificamos como un riesgo latente de saturación e inestabilidad, sobre todo en horarios de alta demanda. Además, el 27% de la muestra sí percibe que su internet afecta su rendimiento académico.</p>
 
-              <h4 class="blog-h" data-i18n="blog_h_highlights">Lo más importante del proyecto</h4>
-              <ul class="blog-highlights">
-                <li><strong class="text-accent fw-medium" data-i18n="hl_sample_l">Muestra:</strong> <span data-i18n="hl_sample">210 estudiantes de Ingeniería en Sistemas de Información, Universidad de Sonora (campus Hermosillo).</span></li>
-                <li><strong class="text-accent fw-medium" data-i18n="hl_finding_l">Hallazgo principal:</strong> <span data-i18n="hl_finding">correlación negativa significativa (r = −0.3292, p &lt; 0.05) entre velocidad de internet y retrasos en entregas.</span></li>
-                <li><strong class="text-accent fw-medium" data-i18n="hl_eq_l">Ecuación:</strong> <span data-i18n="hl_eq">ŷ = 2.45 − 0.003x, con R² = 10.83%.</span></li>
-                <li><strong class="text-accent fw-medium" data-i18n="hl_tools_l">Herramientas:</strong> <span data-i18n="hl_tools">Python (SciPy, Pandas), Excel y Google Forms.</span></li>
-              </ul>
+      <h4 class="blog-h" data-i18n="blog_h_highlights">Lo más importante del proyecto</h4>
+      <ul class="blog-highlights">
+        <li><strong class="text-accent fw-medium" data-i18n="hl_sample_l">Muestra:</strong> <span data-i18n="hl_sample">210 estudiantes de Ingeniería en Sistemas de Información, Universidad de Sonora (campus Hermosillo).</span></li>
+        <li><strong class="text-accent fw-medium" data-i18n="hl_finding_l">Hallazgo principal:</strong> <span data-i18n="hl_finding">correlación negativa significativa (r = −0.3292, p &lt; 0.05) entre velocidad de internet y retrasos en entregas.</span></li>
+        <li><strong class="text-accent fw-medium" data-i18n="hl_eq_l">Ecuación:</strong> <span data-i18n="hl_eq">ŷ = 2.45 − 0.003x, con R² = 10.83%.</span></li>
+        <li><strong class="text-accent fw-medium" data-i18n="hl_tools_l">Herramientas:</strong> <span data-i18n="hl_tools">Python (SciPy, Pandas), Excel y Google Forms.</span></li>
+      </ul>
 
-              <h4 class="blog-h" data-i18n="blog_h_learned">Lo que aprendí</h4>
-              <p data-i18n="blog_p_learned">Este análisis me enseñó que un resultado estadísticamente significativo no siempre es un efecto grande: con un R² de 10.83%, aprendí a distinguir significancia de relevancia práctica, a reconocer los límites de la correlación de Pearson cuando hay valores atípicos y a no confundir correlación con causalidad. También practiqué el ciclo completo de un proyecto de datos, desde diseñar la encuesta y organizar la base hasta interpretar y comunicar los resultados.</p>
+      <h4 class="blog-h" data-i18n="blog_h_learned">Lo que aprendí</h4>
+      <p data-i18n="blog_p_learned">Este análisis me enseñó que un resultado estadísticamente significativo no siempre es un efecto grande: con un R² de 10.83%, aprendí a distinguir significancia de relevancia práctica, a reconocer los límites de la correlación de Pearson cuando hay valores atípicos y a no confundir correlación con causalidad. También practiqué el ciclo completo de un proyecto de datos, desde diseñar la encuesta y organizar la base hasta interpretar y comunicar los resultados.</p>
 
-              <h4 class="blog-h" data-i18n="blog_h_team">Equipo</h4>
-              <ul class="list-group list-group-flush detail-features mb-2">
-            <li class="list-group-item">Damian de Jesus Enriquez Solorzano</li>
-            <li class="list-group-item">Andrés Jovany Leyva Silva</li>
-            <li class="list-group-item">Víctor Miguel Ochoa Camargo</li>
-            <li class="list-group-item">Adalberto Ruiz Chávez</li>
-            <li class="list-group-item">Jesús Francisco Villa Icedo</li>
-              </ul>
-              <p class="small text-secondary mb-4" data-i18n="blog_course">Materia: Análisis de Datos · Maestra: Lucía Guadalupe Estrada Lara</p>
+      <h4 class="blog-h" data-i18n="blog_h_team">Equipo</h4>
+      <ul class="list-group list-group-flush detail-features mb-2">
+        <li class="list-group-item">Damian de Jesus Enriquez Solorzano</li>
+        <li class="list-group-item">Andrés Jovany Leyva Silva</li>
+        <li class="list-group-item">Víctor Miguel Ochoa Camargo</li>
+        <li class="list-group-item">Adalberto Ruiz Chávez</li>
+        <li class="list-group-item">Jesús Francisco Villa Icedo</li>
+      </ul>
+      <p class="small text-secondary mb-4" data-i18n="blog_course">Materia: Análisis de Datos · Maestra: Lucía Guadalupe Estrada Lara</p>
     </div>
 
     <a id="detail-play" class="btn btn-outline-accent w-100 mt-4 d-none" href="#" target="_blank" rel="noopener" data-i18n="btn_play">Jugar ahora</a>
@@ -376,6 +172,7 @@
             Desarrollo aplicaciones de escritorio con C# y bases de datos relacionales con SQL Server.
           </p>
           <div class="d-flex flex-wrap gap-2">
+            <a href="cv.pdf" target="_blank" rel="noopener" class="btn btn-accent px-4">CV</a>
             <a href="https://github.com/damianenriquez680" target="_blank" rel="noopener" class="btn btn-outline-accent px-4">GitHub</a>
           </div>
         </section>
@@ -511,7 +308,6 @@
           <h2 class="h5 text-accent mb-4" data-i18n="blog_title">Blog</h2>
 
           <div class="row g-4">
-
             <!-- Conectividad a Internet Blog -->
             <div class="col">
               <button type="button" class="card project-card h-100" data-project="blog"
@@ -530,456 +326,19 @@
                 </div>
               </button>
             </div>
-
           </div>
+
         </section>
 
       </div>
     </main>
-
   </div>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-<script>
-  // ── Textos de la interfaz en cada idioma ──
-  const i18n = {
-    es: {
-      page_title: 'Damian Enriquez — Portafolio',
-      toggle_label: 'English',
-      toggle_aria: 'Cambiar el idioma a inglés',
-      close: 'Cerrar',
-      aside_label: 'Información de contacto',
-      nav_label: 'Secciones',
-      nav_home: 'Inicio',
-      nav_projects: 'Proyectos',
-      sidebar_role: 'Ing. Sistemas de Información',
-      label_contact: 'Contacto',
-      label_education: 'Formación',
-      edu_degree: 'Ing. en Sistemas de Información',
-      edu_school: 'Universidad de Sonora',
-      edu_status: 'En curso',
-      label_tech: 'Tecnologías',
-      tech_front: 'Frontend',
-      tech_back: 'Backend',
-      tech_tools: 'Herramientas',
-      label_languages: 'Idiomas',
-      lang_es: 'Español — Nativo',
-      lang_en: 'Inglés — B1',
-      hero_label: 'Portafolio',
-      hero_desc: 'Estudiante de Ingeniería en Sistemas de Información en la Universidad de Sonora. Desarrollo aplicaciones de escritorio con C#, APIs web con Flask y bases de datos relacionales, además de interfaces con HTML, CSS y JavaScript.',
-      btn_projects: 'Ver proyectos',
-      projects_title: 'Proyectos',
-      card_escolar_title: 'Sistema Escolar',
-      card_escolar_desc: 'Aplicación de escritorio con CRUD para gestión de alumnos y base de datos relacional.',
-      card_calc_title: 'Calculadora de Coordenadas',
-      card_calc_desc: 'Cálculos matemáticos en sistemas de coordenadas 2D y 3D implementados en consola.',
-      card_biblio_desc: 'API REST con Flask y SQLite para gestión de libros y préstamos, con interfaz HTML.',
-      detail_desc: 'Descripción',
-      detail_features: 'Funcionalidades destacadas',
-      btn_repo: 'Ver repositorio',
-      nav_blog: 'Blog',
-      blog_title: 'Blog',
-      blog_post_title: 'Conectividad a Internet y Rendimiento Académico: Un Análisis Estadístico en Ingeniería en Sistemas',
-      blog_meta: 'Proyecto final de Análisis de Datos · Universidad de Sonora · Semestre 2026-1',
-      blog_h_intro: 'Introducción y contexto',
-      blog_p_intro: 'En la educación moderna, el acceso a internet es una herramienta indispensable, y más aún en Ingeniería en Sistemas de Información: clonar repositorios, descargar dependencias, usar plataformas en la nube o entregar tareas depende de una conexión estable. Con esa idea realizamos un estudio cuantitativo, no experimental, con una muestra de 210 estudiantes de la Universidad de Sonora (campus Hermosillo) para responder una pregunta concreta: ¿cómo impacta la velocidad de conexión (Mbps) en la frecuencia de retrasos en la entrega de actividades académicas?',
-      blog_h_method: 'Metodología y análisis estadístico',
-      blog_p_method1: 'Recolectamos los datos con una encuesta de 15 preguntas en Google Forms, los organizamos en Excel y los procesamos con Python (SciPy y Pandas). Con ellos hicimos un análisis descriptivo, una prueba de hipótesis y un modelo de regresión lineal simple, con un nivel de significancia de α = 0.05.',
-      blog_p_method2: 'La prueba arrojó un coeficiente de correlación de Pearson de r = −0.3292 con un valor p < 0.001 (reportado como 0.0000). Como p < 0.05, rechazamos la hipótesis nula con un 95% de confianza: existe una relación significativa entre la velocidad de internet y los retrasos. El signo negativo indica que, a mayor velocidad, menor es el nivel de retraso reportado.',
-      blog_h_results: 'Resultados e interpretación',
-      blog_p_results1: 'El modelo de regresión obtenido fue ŷ = 2.45 − 0.003x, con un R² = 10.83%. En la práctica, la velocidad funciona como un facilitador: una mejor conexión se asocia con menos retrasos y menos tiempo perdido por fallas, pero explica solo una parte del fenómeno. El cumplimiento final depende en mayor medida de otros factores, como la gestión personal del tiempo y la complejidad de las entregas.',
-      blog_p_results2: 'También observamos que lo más común es compartir la red doméstica con 5 o más dispositivos, lo que identificamos como un riesgo latente de saturación e inestabilidad, sobre todo en horarios de alta demanda. Además, el 27% de la muestra sí percibe que su internet afecta su rendimiento académico.',
-      blog_h_highlights: 'Lo más importante del proyecto',
-      hl_sample_l: 'Muestra:',
-      hl_sample: '210 estudiantes de Ingeniería en Sistemas de Información, Universidad de Sonora (campus Hermosillo).',
-      hl_finding_l: 'Hallazgo principal:',
-      hl_finding: 'correlación negativa significativa (r = −0.3292, p < 0.05) entre velocidad de internet y retrasos en entregas.',
-      hl_eq_l: 'Ecuación:',
-      hl_eq: 'ŷ = 2.45 − 0.003x, con R² = 10.83%.',
-      hl_tools_l: 'Herramientas:',
-      hl_tools: 'Python (SciPy, Pandas), Excel y Google Forms.',
-      blog_h_learned: 'Lo que aprendí',
-      blog_p_learned: 'Este análisis me enseñó que un resultado estadísticamente significativo no siempre es un efecto grande: con un R² de 10.83%, aprendí a distinguir significancia de relevancia práctica, a reconocer los límites de la correlación de Pearson cuando hay valores atípicos y a no confundir correlación con causalidad. También practiqué el ciclo completo de un proyecto de datos, desde diseñar la encuesta y organizar la base hasta interpretar y comunicar los resultados.',
-      blog_h_team: 'Equipo',
-      blog_course: 'Materia: Análisis de Datos · Maestra: Lucía Guadalupe Estrada Lara',
-      blog_btn_drive: 'Ver proyecto en Google Drive',
-      status_wip: 'En curso',
-      card_facturas_title: 'Generador de Facturas',
-      card_facturas_desc: 'API REST con Flask y SQLite para gestionar clientes, productos y facturas. Generación de PDF e interfaz web en desarrollo.',
-      card_generador_title: 'Generador de Datos Estudiantiles',
-      card_generador_desc: 'Herramienta web que genera hasta 50,000 registros ficticios de alumnos en SQL, CSV y JSON para poblar y probar bases de datos.',
-      status_dev: 'En desarrollo',
-      card_juego_title: 'Juego 2D de Supervivencia',
-      card_juego_desc: 'Juego arcade con JavaScript puro y Canvas: movimiento, colisiones y, próximamente, enemigos.',
-      btn_play: 'Jugar ahora'
-    },
-    en: {
-      page_title: 'Damian Enriquez — Portfolio',
-      toggle_label: 'Español',
-      toggle_aria: 'Switch language to Spanish',
-      close: 'Close',
-      aside_label: 'Contact information',
-      nav_label: 'Sections',
-      nav_home: 'Home',
-      nav_projects: 'Projects',
-      sidebar_role: 'Information Systems Eng.',
-      label_contact: 'Contact',
-      label_education: 'Education',
-      edu_degree: 'Information Systems Engineering',
-      edu_school: 'University of Sonora',
-      edu_status: 'In progress',
-      label_tech: 'Technologies',
-      tech_front: 'Frontend',
-      tech_back: 'Backend',
-      tech_tools: 'Tools',
-      label_languages: 'Languages',
-      lang_es: 'Spanish — Native',
-      lang_en: 'English — B1',
-      hero_label: 'Portfolio',
-      hero_desc: 'Information Systems Engineering student at the University of Sonora. I build desktop applications with C#, web APIs with Flask and relational databases, as well as interfaces with HTML, CSS and JavaScript.',
-      btn_projects: 'View projects',
-      projects_title: 'Projects',
-      card_escolar_title: 'School System',
-      card_escolar_desc: 'Desktop application with CRUD operations to manage students, backed by a relational database.',
-      card_calc_title: 'Coordinate Calculator',
-      card_calc_desc: 'Math calculations in 2D and 3D coordinate systems, implemented as a console app.',
-      card_biblio_desc: 'REST API with Flask and SQLite to manage books and loans, with an HTML interface.',
-      detail_desc: 'Description',
-      detail_features: 'Highlighted features',
-      btn_repo: 'View repository',
-      nav_blog: 'Blog',
-      blog_title: 'Blog',
-      blog_post_title: 'Internet Connectivity and Academic Performance: A Statistical Analysis in Systems Engineering',
-      blog_meta: 'Data Analysis final project · University of Sonora · Semester 2026-1',
-      blog_h_intro: 'Introduction and context',
-      blog_p_intro: 'In modern education, internet access is an indispensable tool, even more so in Information Systems Engineering: cloning repositories, downloading dependencies, using cloud platforms or submitting assignments all depend on a stable connection. With that in mind, we ran a non-experimental quantitative study with a sample of 210 students from the University of Sonora (Hermosillo campus) to answer a specific question: how does connection speed (Mbps) affect how often academic assignments are submitted late?',
-      blog_h_method: 'Methodology and statistical analysis',
-      blog_p_method1: 'We collected data with a 15-question Google Forms survey, organized it in Excel and processed it with Python (SciPy and Pandas). With it we performed a descriptive analysis, a hypothesis test and a simple linear regression model, at a significance level of α = 0.05.',
-      blog_p_method2: 'The test returned a Pearson correlation coefficient of r = −0.3292 with a p-value < 0.001 (reported as 0.0000). Since p < 0.05, we rejected the null hypothesis at a 95% confidence level: there is a significant relationship between internet speed and delays. The negative sign means that the faster the connection, the lower the reported level of delay.',
-      blog_h_results: 'Results and interpretation',
-      blog_p_results1: 'The resulting regression model was ŷ = 2.45 − 0.003x, with R² = 10.83%. In practice, speed works as an enabler: a better connection is associated with fewer delays and less time lost to outages, but it explains only part of the phenomenon. Meeting deadlines depends more on other factors, such as personal time management and assignment complexity.',
-      blog_p_results2: 'We also found that sharing the home network with 5 or more devices is the most common scenario, which we identified as a latent risk of congestion and instability, especially at peak hours. In addition, 27% of the sample does perceive that their internet affects their academic performance.',
-      blog_h_highlights: 'Project highlights',
-      hl_sample_l: 'Sample:',
-      hl_sample: '210 Information Systems Engineering students, University of Sonora (Hermosillo campus).',
-      hl_finding_l: 'Main finding:',
-      hl_finding: 'significant negative correlation (r = −0.3292, p < 0.05) between internet speed and late assignments.',
-      hl_eq_l: 'Equation:',
-      hl_eq: 'ŷ = 2.45 − 0.003x, with R² = 10.83%.',
-      hl_tools_l: 'Tools:',
-      hl_tools: 'Python (SciPy, Pandas), Excel and Google Forms.',
-      blog_h_learned: 'What I learned',
-      blog_p_learned: 'This analysis taught me that a statistically significant result is not always a large effect: with an R² of 10.83%, I learned to tell significance apart from practical relevance, to recognize the limits of Pearson correlation in the presence of outliers, and not to confuse correlation with causation. I also practiced the full cycle of a data project, from designing the survey and organizing the dataset to interpreting and communicating the results.',
-      blog_h_team: 'Team',
-      blog_course: 'Course: Data Analysis · Instructor: Lucía Guadalupe Estrada Lara',
-      blog_btn_drive: 'View project on Google Drive',
-      status_wip: 'In progress',
-      card_facturas_title: 'Invoice Generator',
-      card_facturas_desc: 'REST API with Flask and SQLite to manage customers, products and invoices. PDF generation and web interface in development.',
-      card_generador_title: 'Student Data Generator',
-      card_generador_desc: 'Web tool that generates up to 50,000 fake student records in SQL, CSV and JSON to populate and test databases.',
-      status_dev: 'In development',
-      card_juego_title: '2D Survival Game',
-      card_juego_desc: 'Arcade game built with plain JavaScript and Canvas: movement, collisions and, soon, enemies.',
-      btn_play: 'Play now'
-      
-    }
-  };
+<script src="scripts/i18n.js"></script>
+<script src="scripts/projects.js"></script>
+<script src="scripts/script.js"></script>
 
-  // ── Detalle de cada proyecto en cada idioma ──
-  const projects = {
-    'calculadora': {
-      icon: '📐',
-      tags: ['Java'],
-      repo: 'https://github.com/damianenriquez680/calculadora_coordenadas',
-      es: {
-        title: 'Calculadora de Sistemas de Coordenadas',
-        desc: 'Aplicación de consola que realiza conversiones entre sistemas de coordenadas y calcula distancias entre puntos, tanto en dos como en tres dimensiones.',
-        features: [
-          'Conversión 2D: rectangulares ↔ polares',
-          'Conversión 3D: rectangulares, cilíndricas y esféricas entre sí',
-          'Cálculo de distancia entre puntos en cualquier combinación de sistemas',
-          'Código organizado en clases por tipo de coordenada'
-        ]
-      },
-      en: {
-        title: 'Coordinate Systems Calculator',
-        desc: 'Console application that converts between coordinate systems and calculates distances between points, in both two and three dimensions.',
-        features: [
-          '2D conversion: rectangular ↔ polar',
-          '3D conversion: rectangular, cylindrical and spherical, in any direction',
-          'Distance between points in any combination of systems',
-          'Code organized into classes by coordinate type'
-        ]
-      }
-    },
-    'sistema-escolar': {
-      icon: '🗃️',
-      tags: ['C#', 'SQL Server', 'Windows Forms'],
-      repo: 'https://github.com/damianenriquez680/sistema_escolar',
-      es: {
-        title: 'Sistema Escolar con Base de Datos',
-        desc: 'Aplicación de escritorio para la gestión académica de una institución educativa, con operaciones CRUD completas sobre una base de datos relacional de 11 tablas interconectadas: alumnos, académicos, materias, grupos, aulas, carreras y más.',
-        features: [
-          'Catálogos de Materia, Aula, Académico, Alumno, Carrera, Ciudad, Estado, País y Estatus',
-          'Gestión de Grupos con maestro, aula, horario y carrera asignados',
-          'Registro de Reinscripciones con calificaciones',
-          'Interfaz Windows Forms con navegación centralizada',
-          'Proyecto en equipo — Desarrollo de Sistemas 3'
-        ]
-      },
-      en: {
-        title: 'School System with Database',
-        desc: 'Desktop application for the academic management of an educational institution, with full CRUD operations over a relational database of 11 interconnected tables: students, faculty, subjects, groups, classrooms, degree programs and more.',
-        features: [
-          'Catalogs for Subject, Classroom, Faculty, Student, Degree Program, City, State, Country and Status',
-          'Group management with assigned teacher, classroom, schedule and degree program',
-          'Re-enrollment records with grades',
-          'Windows Forms interface with centralized navigation',
-          'Team project — Systems Development 3'
-        ]
-      }
-    },
-    'generador-alumnos': {
-      icon: '🎓',
-      tags: ['HTML', 'JavaScript', 'Tailwind CSS', 'SQL'],
-      repo: 'https://github.com/damianenriquez680/generador_alumnos',
-      es: {
-        title: 'Generador de Datos Estudiantiles',
-        desc: 'Herramienta web que genera hasta 50,000 registros ficticios de alumnos en SQL, CSV y JSON para poblar y probar bases de datos.',
-        features: [
-          'Formatos de salida: SQL (MySQL/MariaDB), CSV y JSON, con descarga de archivo',
-          'Datos ficticios: apellidos mexicanos y rusos, nombres mexicanos y franceses',
-          'Matrículas consecutivas y correo institucional',
-          'Entre 1 y 50,000 registros por generación',
-          'Proyecto individual — Base de Datos 2, Universidad de Sonora (marzo de 2026)',
-          'Realizado con el apoyo del profesor Jose Humberto Abril Garcia'
-        ]
-      },
-      en: {
-        title: 'Student Data Generator',
-        desc: 'Web tool that generates up to 50,000 fake student records in SQL, CSV and JSON to populate and test databases.',
-        features: [
-          'Output formats: SQL (MySQL/MariaDB), CSV and JSON, with file download',
-          'Fake data: Mexican and Russian last names, Mexican and French first names',
-          'Sequential student IDs and institutional email',
-          'Between 1 and 50,000 records per run',
-          'Individual project — Database 2, University of Sonora (March 2026)',
-          'Built with the support of Professor Jose Humberto Abril Garcia'
-        ]
-      }
-    },
-    'biblioteca': {
-      icon: '📚',
-      tags: ['Flask', 'SQLite', 'Python', 'HTML', 'CSS'],
-      repo: 'https://github.com/damianenriquez680/biblioteca_flask',
-      es: {
-        title: 'BiblioTeca — Sistema de Gestión de Biblioteca',
-        desc: 'API REST construida con Flask y SQLite para administrar libros y préstamos de una biblioteca, con interfaz HTML conectada al backend.',
-        features: [
-          'Endpoints REST completos para libros y préstamos',
-          'Control automático de stock al crear o eliminar préstamos',
-          'Validación de email, ISBN y año de publicación',
-          'Queries parametrizadas para prevenir inyección SQL',
-          'Estadísticas generales vía endpoint /stats',
-          'Proyecto en equipo'
-        ]
-      },
-      en: {
-        title: 'BiblioTeca — Library Management System',
-        desc: 'REST API built with Flask and SQLite to manage a library\'s books and loans, with an HTML interface connected to the backend.',
-        features: [
-          'Complete REST endpoints for books and loans',
-          'Automatic stock control when creating or deleting loans',
-          'Email, ISBN and publication year validation',
-          'Parameterized queries to prevent SQL injection',
-          'General statistics via the /stats endpoint',
-          'Team project'
-        ]
-      }
-    },
-    'juego-2d': {
-      icon: '🎮',
-      wip: true,
-      tags: ['JavaScript', 'HTML5 Canvas'],
-      repo: 'https://github.com/damianenriquez680/minijuego_2d',
-      play: 'https://damianenriquez680.github.io/minijuego_2d/',
-      es: {
-        title: 'Juego 2D de Supervivencia',
-        desc: 'Juego 2D tipo arcade hecho con JavaScript puro y HTML5 Canvas, sin frameworks ni librerías. Proyecto en desarrollo: ya cuenta con movimiento y colisiones, y siguen los enemigos, el puntaje y el game over.',
-        features: [
-          'Movimiento con flechas o WASD',
-          'Game loop con requestAnimationFrame (update + draw)',
-          'Velocidad normalizada en diagonal',
-          'Colisiones AABB con un obstáculo, resueltas por ejes para deslizarse por los bordes',
-          'Próximamente: enemigos que persiguen, puntaje, game over y dificultad progresiva',
-          'Proyecto individual'
-        ]
-      },
-      en: {
-        title: '2D Survival Game',
-        desc: 'Arcade-style 2D game built with plain JavaScript and HTML5 Canvas, with no frameworks or libraries. Work in progress: movement and collisions are done; enemies, scoring and game over are next.',
-        features: [
-          'Movement with arrow keys or WASD',
-          'Game loop with requestAnimationFrame (update + draw)',
-          'Diagonal speed normalization',
-          'AABB collisions with an obstacle, resolved per axis so the player slides along edges',
-          'Coming soon: chasing enemies, score, game over and progressive difficulty',
-          'Individual project'
-        ]
-      }
-    },
-    'facturas': {
-      icon: '🧾',
-      wip: true,
-      tags: ['Flask', 'SQLite', 'Python'],
-      repo: 'https://github.com/damianenriquez680/generador_facturas',
-      es: {
-        title: 'Generador de Facturas',
-        desc: 'Sistema para generar facturas y presupuestos, con una API REST en Flask y base de datos SQLite. Proyecto en curso: faltan la generación de PDF y la interfaz web.',
-        features: [
-          'API REST completa para clientes, productos y facturas (GET, POST, PUT y DELETE)',
-          'Al consultar una factura por id, incluye su detalle con los productos',
-          'Fecha de emisión y estatus asignados automáticamente por la base de datos',
-          'Base de datos SQLite con 4 tablas: clientes, productos, facturas y detalle',
-          'Probada con Postman',
-          'En desarrollo: generación de PDF con WeasyPrint e interfaz en HTML, CSS y JavaScript'
-        ]
-      },
-      en: {
-        title: 'Invoice Generator',
-        desc: 'System to generate invoices and quotes, with a REST API in Flask and a SQLite database. Work in progress: PDF generation and the web interface are still missing.',
-        features: [
-          'Complete REST API for customers, products and invoices (GET, POST, PUT and DELETE)',
-          'Fetching an invoice by id includes its detail with the products',
-          'Issue date and status assigned automatically by the database',
-          'SQLite database with 4 tables: customers, products, invoices and invoice detail',
-          'Tested with Postman',
-          'In development: PDF generation with WeasyPrint and an HTML, CSS and JavaScript interface'
-        ]
-      }
-    },
-    'blog': {
-      layout: 'blog',
-      icon: '📊',
-      tags: ['Python', 'SciPy', 'Pandas', 'Excel', 'Google Forms'],
-      repo: 'https://drive.google.com/drive/folders/1FcnSOAf4jtINZaZrklkCC7M6od9lOR-c?usp=sharing'
-    }
-  };
-
-  // ── Idioma actual (se recuerda entre visitas) ──
-  let lang = 'es';
-  try {
-    const saved = localStorage.getItem('lang');
-    if (saved === 'es' || saved === 'en') lang = saved;
-  } catch (e) { /* sin almacenamiento: se usa español */ }
-
-  const panel = document.getElementById('detailPanel');
-  const langBtn = document.getElementById('langToggle');
-  let currentProject = null;
-
-  const t = key => i18n[lang][key];
-
-  function renderDetail() {
-    const p = projects[currentProject];
-    if (!p) return;
-    const isBlog = p.layout === 'blog';
-    const c = p[lang] || {};
-
-    document.getElementById('detail-status').classList.toggle('d-none', !p.wip);
-    document.getElementById('detail-icon').textContent = p.icon;
-
-    // Alterna entre la vista de proyecto y la vista de artículo
-    document.getElementById('detail-project').hidden = isBlog;
-    document.getElementById('detail-blog').hidden = !isBlog;
-
-    const tagsHtml = p.tags.map(tag => `<span class="badge rounded-pill tag">${tag}</span>`).join('');
-    document.getElementById('detail-tags').innerHTML = tagsHtml;
-    document.getElementById('detail-blog-tags').innerHTML = tagsHtml;
-
-    if (!isBlog) {
-      document.getElementById('detail-title').textContent = c.title;
-      document.getElementById('detail-desc').textContent = c.desc;
-      document.getElementById('detail-features').innerHTML =
-        c.features.map(f => `<li class="list-group-item">${f}</li>`).join('');
-    }
-
-    const repoBtn = document.getElementById('detail-repo');
-    repoBtn.href = p.repo;
-    repoBtn.textContent = t(isBlog ? 'blog_btn_drive' : 'btn_repo');
-
-    // Botón "Jugar ahora": solo en proyectos que tengan play (nunca en el blog)
-    const play = document.getElementById('detail-play');
-    play.href = p.play || '#';
-    play.classList.toggle('d-none', isBlog || !p.play);
-  }
-
-  function applyLang() {
-    document.documentElement.lang = lang;
-    document.title = t('page_title');
-
-    document.querySelectorAll('[data-i18n]').forEach(el => { el.textContent = t(el.dataset.i18n); });
-    document.querySelectorAll('[data-i18n-aria]').forEach(el => { el.setAttribute('aria-label', t(el.dataset.i18nAria)); });
-
-    langBtn.textContent = t('toggle_label');
-    langBtn.setAttribute('aria-label', t('toggle_aria'));
-
-    renderDetail();   // si el panel está abierto, se traduce al instante
-  }
-
-  langBtn.addEventListener('click', () => {
-    lang = lang === 'es' ? 'en' : 'es';
-    try { localStorage.setItem('lang', lang); } catch (e) {}
-    applyLang();
-  });
-
-  // Bootstrap dispara este evento al abrir el offcanvas; relatedTarget es la tarjeta que se tocó
-  panel.addEventListener('show.bs.offcanvas', event => {
-    const card = event.relatedTarget;
-    if (!card || !projects[card.dataset.project]) return;
-
-    currentProject = card.dataset.project;
-    panel.classList.toggle('panel-wide', currentProject === 'blog');
-    document.querySelectorAll('.project-card.selected').forEach(c => c.classList.remove('selected'));
-    card.classList.add('selected');
-    renderDetail();
-  });
-
-  panel.addEventListener('hidden.bs.offcanvas', () => {
-    document.querySelectorAll('.project-card.selected').forEach(c => c.classList.remove('selected'));
-  });
-
-  applyLang();
-
-  // ── Enlace activo de la navegación (blanco + subrayado) ──
-  const navLinks = [...document.querySelectorAll('#siteNav .nav-link')];
-  const navSections = navLinks.map(a => document.querySelector(a.getAttribute('href')));
-
-  function setActive(index) {
-    navLinks.forEach((a, i) => {
-      a.classList.toggle('active', i === index);
-      if (i === index) a.setAttribute('aria-current', 'true');
-      else a.removeAttribute('aria-current');
-    });
-  }
-
-  function updateNav() {
-    let index = 0;
-    navSections.forEach((section, i) => {
-      if (section && section.getBoundingClientRect().top - 120 <= 0) index = i;
-    });
-    // Al llegar al final de la página, se marca la última sección
-    if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 4) {
-      index = navSections.length - 1;
-    }
-    setActive(index);
-  }
-
-  navLinks.forEach((a, i) => a.addEventListener('click', () => setActive(i)));
-  window.addEventListener('scroll', updateNav, { passive: true });
-  window.addEventListener('resize', updateNav);
-  updateNav();
-</script>
 </body>
 </html>
