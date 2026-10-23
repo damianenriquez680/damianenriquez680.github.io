@@ -70,7 +70,7 @@ const i18n = {
         card_juego_desc: 'Juego arcade con JavaScript puro y Canvas: movimiento, colisiones y, próximamente, enemigos.',
         btn_play: 'Jugar ahora',
         card_flappy_title: 'Flappy Bird (Demo en Unity)',
-        card_flappy_desc: 'Demo de Flappy Bird hecho con Unity y C# para aprender las mecánicas principales de un videojuego.'
+        card_flappy_desc: 'Demo de Flappy Bird hecho con Unity y C# para aprender las mecánicas principales de un videojuego.',
     },
     en: {
         page_title: 'Damian Enriquez — Portfolio',
@@ -142,6 +142,6 @@ const i18n = {
         card_juego_desc: 'Arcade game built with plain JavaScript and Canvas: movement, collisions and, soon, enemies.',
         btn_play: 'Play now',
         card_flappy_title: 'Flappy Bird (Unity Demo)',
-        card_flappy_desc: 'Flappy Bird demo built with Unity and C# to learn the core mechanics of game development.'
+        card_flappy_desc: 'Flappy Bird demo built with Unity and C# to learn the core mechanics of game development.',
     }
 };
