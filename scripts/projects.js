@@ -171,6 +171,36 @@ const projects = {
         ]
         }
     },
+    'flappy-bird': {
+        icon: '🐦',
+        tags: ['Unity', 'C#', 'Photoshop'],
+        repo: 'https://github.com/damianenriquez680/flappy_bird_unity',
+        play: 'https://damianenriquez680.github.io/flappy_bird_unity/',
+        es: {
+        title: 'Flappy Bird (Demo en Unity)',
+        desc: 'Demo de Flappy Bird hecho con Unity y C# para aprender las mecánicas principales del desarrollo de videojuegos: físicas 2D, entrada del jugador, colisiones, generación de objetos y puntaje. El arte lo dibujé yo en Photoshop.',
+        features: [
+            'Físicas 2D',
+            'Entrada del jugador',
+            'Detección de colisiones',
+            'Generación de objetos',
+            'Sistema de puntaje',
+            'Arte original dibujado en Photoshop'
+        ]
+        },
+        en: {
+        title: 'Flappy Bird (Unity Demo)',
+        desc: 'Flappy Bird demo built with Unity and C# to learn the core mechanics of game development: 2D physics, player input, collisions, object spawning and scoring. I drew the art myself in Photoshop.',
+        features: [
+            '2D physics',
+            'Player input',
+            'Collision detection',
+            'Object spawning',
+            'Scoring system',
+            'Original art drawn in Photoshop'
+        ]
+        }
+    },
     'blog': {
         layout: 'blog',
         icon: '📊',

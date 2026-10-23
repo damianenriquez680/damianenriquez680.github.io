@@ -43,7 +43,7 @@ Estudiante de **Ingeniería en Sistemas de Información** en la Universidad de S
 - **Frontend:** HTML, CSS, JavaScript, Bootstrap 5, Tailwind CSS
 - **Backend:** Python, Flask, C#, Java
 - **Bases de datos:** SQL Server, SQLite
-- **Herramientas:** Visual Studio, VS Code, Postman
+- **Herramientas:** Visual Studio, VS Code, Postman, Unity, Photoshop
 
 ---
 
@@ -55,6 +55,7 @@ Estudiante de **Ingeniería en Sistemas de Información** en la Universidad de S
 | Calculadora de Coordenadas | Java | [Ver repo](https://github.com/damianenriquez680/CalculadoraCoordenadas) |
 | Generador de Datos Estudiantiles | HTML, JavaScript, Tailwind CSS, SQL | [Ver repo](https://github.com/damianenriquez680/generador_alumnos) |
 | BiblioTeca | Flask, SQLite, Python, HTML, CSS | [Ver repo](https://github.com/damianenriquez680/biblioteca_flask) |
+| Flappy Bird (Demo en Unity) | Unity, C#, Photoshop | [Ver repo](https://github.com/damianenriquez680/flappy_bird_unity) · [Jugar](https://damianenriquez680.github.io/flappy_bird_unity/) |
 | Juego 2D de Supervivencia *(en desarrollo)* | JavaScript, HTML5 Canvas | [Ver repo](https://github.com/damianenriquez680/minijuego_2dS) |
 | Generador de Facturas *(en curso)* | Flask, SQLite, Python | [Ver repo](https://github.com/damianenriquez680/generador_facturas) |
 
