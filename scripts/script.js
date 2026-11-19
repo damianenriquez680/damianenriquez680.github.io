@@ -12,37 +12,38 @@ let currentProject = null;
 const t = key => i18n[lang][key];
 
 function renderDetail() {
-const p = projects[currentProject];
-if (!p) return;
-const isBlog = p.layout === 'blog';
-const c = p[lang] || {};
+    const p = projects[currentProject];
+    if (!p) return;
+    const isBlog = p.layout === 'blog';
+    const c = p[lang] || {};
 
-document.getElementById('detail-status').classList.toggle('d-none', !p.wip);
-document.getElementById('detail-icon').textContent = p.icon;
+    document.getElementById('detail-status').classList.toggle('d-none', !p.wip);
+    document.getElementById('detail-icon').textContent = p.icon;
 
-// Alterna entre la vista de proyecto y la vista de artículo
-document.getElementById('detail-project').hidden = isBlog;
-document.getElementById('detail-blog').hidden = !isBlog;
+    // Alterna entre la vista de proyecto y la vista de artículo
+    document.getElementById('detail-project').hidden = isBlog;
+    document.getElementById('detail-blog').hidden = !isBlog;
 
-const tagsHtml = p.tags.map(tag => `<span class="badge rounded-pill tag">${tag}</span>`).join('');
-document.getElementById('detail-tags').innerHTML = tagsHtml;
-document.getElementById('detail-blog-tags').innerHTML = tagsHtml;
+    const tagsHtml = p.tags.map(tag => `<span class="badge rounded-pill tag">${tag}</span>`).join('');
+    document.getElementById('detail-tags').innerHTML = tagsHtml;
+    document.getElementById('detail-blog-tags').innerHTML = tagsHtml;
 
-if (!isBlog) {
-    document.getElementById('detail-title').textContent = c.title;
-    document.getElementById('detail-desc').textContent = c.desc;
-    document.getElementById('detail-features').innerHTML =
-    c.features.map(f => `<li class="list-group-item">${f}</li>`).join('');
-}
+    if (!isBlog) {
+        document.getElementById('detail-title').textContent = c.title;
+        document.getElementById('detail-desc').textContent = c.desc;
+        document.getElementById('detail-features').innerHTML =
+        c.features.map(f => `<li class="list-group-item">${f}</li>`).join('');
+    }
 
-const repoBtn = document.getElementById('detail-repo');
-repoBtn.href = p.repo;
-repoBtn.textContent = t(isBlog ? 'blog_btn_drive' : 'btn_repo');
+    const repoBtn = document.getElementById('detail-repo');
+    repoBtn.href = p.repo;
+    repoBtn.textContent = t(isBlog ? 'blog_btn_drive' : 'btn_repo');
 
-// Botón "Jugar ahora": solo en proyectos que tengan play (nunca en el blog)
-const play = document.getElementById('detail-play');
-play.href = p.play || '#';
-play.classList.toggle('d-none', isBlog || !p.play);
+    // Botón "Jugar ahora": solo en proyectos que tengan play (nunca en el blog)
+    const play = document.getElementById('detail-play');
+    play.href = p.play || '#';
+    play.textContent = t(p.playLabel || 'btn_play');
+    play.classList.toggle('d-none', isBlog || !p.play);
 }
 
 function applyLang() {

@@ -56,6 +56,8 @@ const projects = {
         icon: '🎓',
         tags: ['HTML', 'JavaScript', 'Tailwind CSS', 'SQL'],
         repo: 'https://github.com/damianenriquez680/generador_alumnos',
+        play: 'https://damianenriquez680.github.io/generador_alumnos/',
+        playLabel: 'btn_try',
         es: {
         title: 'Generador de Datos Estudiantiles',
         desc: 'Herramienta web que genera hasta 50,000 registros ficticios de alumnos en SQL, CSV y JSON para poblar y probar bases de datos.',
